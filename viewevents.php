@@ -43,6 +43,12 @@
 			if (isset($_POST['selectEvent']))
 			{
 				$selected = mysqli_real_escape_string($conn ,$_POST['selectEvent']);
+				
+				$sql = "SELECT description FROM Task WHERE task_id = '" . $selected . "'";
+				$result = mysqli_query($conn, $sql);
+				$arow = mysqli_fetch_row($result);
+				echo "<h2>$arow[0]</h2>";
+				
 				$sql = "SELECT event_id, title, description, location, date_time_start, date_time_end FROM Event WHERE task_id = '" . $selected . "'";
 				$result = $conn->query($sql);
 
