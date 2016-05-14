@@ -1,0 +1,5 @@
+\bin
+\obj
+\properties
+*.config
+*.cspr*
