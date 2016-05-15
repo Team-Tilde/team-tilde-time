@@ -1,81 +1,138 @@
-<html>
-
-<head>
-	<title>Edit Event</title>
-	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
-</head>
-
-<body>
-
-	<?php
-	session_start();
-	require_once "php/auth.php";
-	require_login();
-	?>
-
-	<div class="container">
+<?php
+	require_once "php/conf.php";
 	
-		<?php
-			require_once "php/nav.php";
-		?>
-		<form class="form-horizontal">
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Select task:</label>
-				<div class="col-sm-10">
-					<select class="form-control">
-						<option>ITECH1000 Assignment 1</option>
-						<option selected>ITECH1000 Tutorial 1</option>
-						<option>ITECH2200 Lab 1</option>
-						<option>ITECH3440 Assignment 1</option>
-						<option>ITECH3440 Lab 1</option>
-					</select>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Select event to edit:</label>
-				<div class="col-sm-10">
-					<select class="form-control">
-						<option>Make a Hello World Project</option>
-						<option>Type System.out.println("Hello")</option>
-					</select>
-				</div>
-			</div>
-			<hr>
+	$conn = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
+	
+	if ($conn->connect_error) {
+		die("Connection failed: " . $conn->connect_error);
+	}
+	
+	
+	$eventID = mysqli_real_escape_string($conn ,$_GET['event']);
+	
+	$sql = "SELECT title, description, location, public, private, date_time_start, date_time_end, task_id FROM Event WHERE event_id = '" . $eventID . "'";
+	
+	$result = $conn->query($sql);
+	$title;
+	$description;
+	$location;
+	$public;
+	$private;
+	
+	if ($result->num_rows > 0) {
+			
+		while($row = $result->fetch_assoc()) {
+			$title = $row['title'];
+			$description = $row['description'];
+			$location = $row['location'];
+			$start_date = $row['date_time_start'];
+			$end_date = $row['date_time_end'];
+			$public = $row['public'];
+			$private = $row['private'];
+			$taskid = $row['task_id'];
+		}
+	} else {
+		echo "No events found.";
+	}
+
+	echo '<form id="editEventForm" class="form-horizontal">
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Event Title:</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="inputEmail3" placeholder="Event Title" value="Make a Hello World Project">
+					<input id="eventTitleText" type="text" class="form-control" value="' . $title . '">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Start Date/Time:</label>
 				<div class="col-sm-10">
-				<input type="text" class="form-control" id="inputPassword3" placeholder="Start Date/Time" value="09/10/2010 6:00PM">
+					<input id="eventStartDateText" type="text" class="form-control" value="' . $start_date . '">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">End Date/Time:</label>
 				<div class="col-sm-10">
-				<input type="text" class="form-control" id="inputPassword3" placeholder="End Date/Time" value="10/10/2010 9:00PM">
+				<input id="eventEndDateText" type="text" class="form-control" value="' . $end_date . '">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Description:</label>
 				<div class="col-sm-10">
-				<textarea class="form-control" rows="10" placeholder="Description">Open up Microsoft Visual Studio 2013.&#13;&#10;Go to File->New Project.&#13;&#10;Change the project name to Tutorial 1 - Hello World.&#13;&#10;Click OK.</textarea>
+				<textarea id="eventDescriptionText" class="form-control" rows="5">' . $description . '</textarea>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Location:</label>
+				<div class="col-sm-10">
+				<input id="eventLocationText" type="text" class="form-control" value="' . $location . '">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Assign Tasks To:</label>
+				<div class="col-sm-10">
+					<select id="eventTaskIDText" class="form-control">';
+						
+						$sql = "SELECT task_id, description FROM Task";
+						$result = $conn->query($sql);
+						
+						if ($result->num_rows > 0) {
+							while($row = $result->fetch_assoc()) {
+								if ($taskid === $row['task_id'])
+								{
+									echo "<option value='" . $row['task_id'] . "' selected='selected'>" . $row['description'] . "</option>";
+								}
+								else
+								{
+									echo "<option value='" . $row['task_id'] . "'>" . $row['description'] . "</option>";
+								}	
+							}
+						}
+						else {
+							echo "<option>'No task found'</option>";
+						}
+					
+					echo '</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Public</label>
+				<div class="col-sm-10">
+					<select id="eventPublicText" class="form-control">';
+						if ($public === '1')
+						{
+							echo '<option value="1" selected="selected">Yes</option>
+									<option value="0">No</option>';
+						}
+						else
+						{
+							echo '<option value="1">Yes</option>
+									<option value="0" selected="selected">No</option>';
+						}
+					echo '</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Private</label>
+				<div class="col-sm-10">
+					<select id="eventPrivateText" class="form-control">';
+						if ($private === '1')
+						{
+							echo '<option value="1" selected="selected">Yes</option>
+									<option value="0">No</option>';
+						}
+						else
+						{
+							echo '<option value="1">Yes</option>
+									<option value="0" selected="selected">No</option>';
+						}
+					echo '</select>
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-default">Save event</button>
+					<button class="btn btn-default" onclick="editEventData('; echo $eventID . ')">Edit event</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
-		</form>
-		
-		
-	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-</body>
-
-</html>
+		</form>';
+		$conn->close();
+?>
