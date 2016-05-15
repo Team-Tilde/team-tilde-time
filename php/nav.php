@@ -9,7 +9,7 @@ function echoActiveClass($requestUri)
 	
 }
 
-function echoActiveMenu($wordInUrl, $wordInUrl2)
+function echoActiveMenu($wordInUrl)
 {
 	$current_file_name = basename($_SERVER['REQUEST_URI']);
 	
@@ -33,17 +33,20 @@ function echoActiveMenu($wordInUrl, $wordInUrl2)
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li><a href="#">Messages</a></li>
-				<li <?php echoActiveMenu("event", "task")?> dropdown">
+				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tasks <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li class="dropdown-header">Tasks</li>
 						<li><a href="#">Add Tasks</a></li>
 						<li><a href="#">Edit Tasks</a></li>
-						<li role="separator" class="divider"></li>
+					</ul>
+				</li>
+				<li <?php echoActiveMenu("event")?> dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Events <span class="caret"></span></a>
+					<ul class="dropdown-menu">
 						<li class="dropdown-header">Events</li>
-						<li <?php echoActiveClass("viewevents");?> ><a href="viewevents.php">VIew Events</a></li>
-						<li <?php echoActiveClass("addevent");?> ><a href="addevent.php">Add Event</a></li>
-						<li <?php echoActiveClass("editevent");?> ><a href="editevent.php">Edit Event</a></li>
+						<li <?php echoActiveClass("viewevents");?> ><a href="viewevents.php">View Events</a></li>
+						<li><a href="#" onclick="showAddEventModal()">Add Event</a></li>
 					</ul>
 				</li>
 				<li><a href="#">Upcoming</a></li>
@@ -58,3 +61,4 @@ function echoActiveMenu($wordInUrl, $wordInUrl2)
 		</div>
 	</div>
 </nav>
+
