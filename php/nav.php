@@ -43,7 +43,7 @@ function echoActiveMenu($wordInUrl)
 				</li>
 				<li><a href="calendar.php">Calendar</a></li>
 				<li <?php echoActiveMenu("event")?> dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Events <span class="caret"></span></a>
+					<a href="viewevents.php" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Events <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li class="dropdown-header">Events</li>
 						<li <?php echoActiveClass("viewevents");?> ><a href="viewevents.php">View Events</a></li>
