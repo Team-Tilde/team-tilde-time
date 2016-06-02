@@ -41,6 +41,7 @@ function echoActiveMenu($wordInUrl)
 						<li><a href="#">Edit Tasks</a></li>
 					</ul>
 				</li>
+				<li><a href="calendar.php">Calendar</a></li>
 				<li <?php echoActiveMenu("event")?> dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Events <span class="caret"></span></a>
 					<ul class="dropdown-menu">
