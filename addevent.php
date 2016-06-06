@@ -33,6 +33,32 @@
 				</div>
 			</div>
 			<div class="form-group">
+				<label class="col-sm-2 control-label">Event Category:</label>
+				<div class="col-sm-10">
+					<select id="eventCategoryText" class="form-control">';
+						 
+						$conn = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
+						
+						if ($conn->connect_error) {
+							die("Connection failed: " . $conn->connect_error);
+						}
+						
+						$sql = "SELECT event_category_id, description FROM EventCategory";
+						$result = $conn->query($sql);
+						
+						if ($result->num_rows > 0) {
+							while($row = $result->fetch_assoc()) {
+								echo "<option value='" . $row['event_category_id'] . "'>" . $row['description'] . "</option>";
+							}
+						}
+						else {
+							echo "<option>'No task found'</option>";
+						}
+					
+					echo '</select>
+				</div>
+			</div>
+			<div class="form-group">
 				<label class="col-sm-2 control-label">Assign Tasks To:</label>
 				<div class="col-sm-10">
 					<select id="eventTaskIDText" class="form-control">';
