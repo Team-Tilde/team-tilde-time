@@ -35,21 +35,29 @@
 #time_container {
 	font-size: 20px;
 	border-right: 1px solid #007cc3;
-	padding-right: 20px;
+}
+
+#calendar_drawarea {
+	position: absolute;
+	left: 7%;
+	height: 100%;
+	width: 100%;
+	border-left: 1px dashed #007cc3
 }
 
 #time_whole_item, #time_half_item {
-
+	padding: 0;
+	width: 7%;
 }
 
 #time_half {
-	height: 30px;
 	font-size: 10px;
-	padding-top: 7px;
+	padding-top: 5px;
 	border-top: 1px dotted #007cc3;
 	border-bottom: 1px solid #007cc3;
 }
 
 #time_whole, #time_half {
+	height: 28.5px;
 	text-align: center;
 }
