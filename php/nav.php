@@ -33,16 +33,16 @@ function echoActiveMenu($wordInUrl)
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li><a href="#">Messages</a></li>
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tasks <span class="caret"></span></a>
+				<li <?php echoActiveMenu("task");?> class="dropdown">
+					<a href="viewtasks.php" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tasks <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li class="dropdown-header">Tasks</li>
-						<li><a href="#">Add Tasks</a></li>
-						<li><a href="#">Edit Tasks</a></li>
+						<li <?php echoActiveClass("viewevents");?> ><a href="viewtasks.php">View Tasks</a></li>
+						<li><a href="#" onclick="showAddTaskModal()">Add Tasks</a></li>
 					</ul>
 				</li>
 				<li <?php echoActiveClass("calendar");?>><a href="calendar.php">Calendar</a></li>
-				<li <?php echoActiveMenu("event")?> dropdown">
+				<li <?php echoActiveMenu("event");?> dropdown">
 					<a href="viewevents.php" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Events <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li class="dropdown-header">Events</li>
