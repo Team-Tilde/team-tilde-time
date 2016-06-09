@@ -37,7 +37,7 @@ function echoActiveMenu($wordInUrl)
 					<a href="viewtasks.php" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tasks <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li class="dropdown-header">Tasks</li>
-						<li <?php echoActiveClass("viewevents");?> ><a href="viewtasks.php">View Tasks</a></li>
+						<li <?php echoActiveClass("viewtasks");?> ><a href="viewtasks.php">View Tasks</a></li>
 						<li><a href="#" onclick="showAddTaskModal()">Add Tasks</a></li>
 					</ul>
 				</li>
