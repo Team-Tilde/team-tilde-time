@@ -103,6 +103,32 @@
 				</div>
 			</div>
 			<div class="form-group">
+				<label class="col-sm-2 control-label">Event Status:</label>
+				<div class="col-sm-10">
+					<select id="eventStatusText" class="form-control">';
+						 
+						$conn = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
+						
+						if ($conn->connect_error) {
+							die("Connection failed: " . $conn->connect_error);
+						}
+						
+						$sql = "SELECT task_event_status_id, status FROM TaskEventStatus";
+						$result = $conn->query($sql);
+						
+						if ($result->num_rows > 0) {
+							while($row = $result->fetch_assoc()) {
+								echo "<option value='" . $row['task_event_status_id'] . "'>" . $row['status'] . "</option>";
+							}
+						}
+						else {
+							echo "<option>'No task found'</option>";
+						}
+					
+					echo '</select>
+				</div>
+			</div>
+			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 					<button class="btn btn-default" onclick="insertEventData()">Add event</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

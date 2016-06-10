@@ -15,10 +15,10 @@
 	
 	echo "<h2>$arow[0]</h2>";
 	
-	$sql = "SELECT e.event_id, ec.description as ecdescription, e.title, e.description, e.location, e.date_time_start, e.date_time_end FROM Event as e
+	$sql = "SELECT e.event_id, ec.description as ecdescription, e.title, e.description, e.location, e.date_time_start, e.date_time_end, tes.status FROM Event as e
 			JOIN eventcategory as ec ON e.event_category_id = ec.event_category_id
-			WHERE task_id = '" . $selected . "' " . 
-			"ORDER BY e.date_time_end";
+			JOIN TaskEventStatus as tes ON e.task_event_status_id = tes.task_event_status_id
+			WHERE task_id = '" . $selected . "'";
 	$result = $conn->query($sql);
 
 	if ($result->num_rows > 0) {
@@ -29,26 +29,28 @@
 						<td width='10%'><strong>Event Number</strong></td>
 						<td width='10%'><strong>Event Name</strong></td>
 						<td width='10%'><strong>Event Category</strong></td>
-						<td width='34%'><strong>Description</strong></td>
+						<td width='30%'><strong>Description</strong></td>
 						<td width='10%'><strong>Venue</strong></td>
 						<td width='10%'><strong>Start Date</strong></td>
 						<td width='10%'><strong>Finish Date</strong></td>
+						<td width='4%'><strong>Status</strong></td>
 						<td width='5%'><strong>Options</strong></td>
 					<tr>";
 		
 		while($row = $result->fetch_assoc()) {
-			$start_date = date_create($row['date_time_start'], timezone_open("Australia/Sydney"));
-			$end_date = date_create($row['date_time_end'], timezone_open("Australia/Sydney"));
+			$start_date = date_create($row['date_time_start']);
+			$end_date = date_create($row['date_time_end']);
 			
 			echo "<tr>
 					<td width='1%'><label><input class='checkSelect' type='checkbox' value='" . $row['event_id'] . "'></label></td>
 					<td width='10%'><p>Event " . $row['event_id'] .  "</p></td>
 					<td width='10%'><p>" . $row['title'] . "</p></td>
 					<td width='10%'><p>" . $row['ecdescription'] . "</p></td>
-					<td width='34%'><p>" . $row['description'] . "</p></td>
+					<td width='30%'><p>" . $row['description'] . "</p></td>
 					<td width='10%'><p>" . $row['location'] . "</p></td>
 					<td width='10%'><p>" . date_format($start_date, 'l jS F Y h:i a') . "</p></td>
 					<td width='10%'><p>" . date_format($end_date, 'l jS F Y h:i a') . "</p></td>
+					<td width='4%'><p>" . $row['status'] . "</p></td>
 					<td width='5%'><p><a href='#'" . $row['event_id'] . " title='"  . $row['event_id'] . "' onclick='showEventDetails(this.title)'><span class='glyphicon glyphicon-search'></span></a>
 							<a href='#'" . $row['event_id'] . " title='"  . $row['event_id'] . "' onclick='showEditEventModal(this.title)'><span class='glyphicon glyphicon-pencil'></span></a>
 							<a href='#'" . $row['event_id'] . " title='"  . $row['event_id'] . "' onclick='showDeleteEventModal(this.title)'><span class='glyphicon glyphicon-trash'></span></a></p></td>

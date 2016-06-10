@@ -99,6 +99,7 @@
 					+ "description=" + document.getElementById("eventDescriptionText").value + "&"
 					+ "location=" + document.getElementById("eventLocationText").value + "&"
 					+ "eventcategoryid=" + document.getElementById("eventCategoryText").value + "&"
+					+ "taskeventstatusid=" + document.getElementById("eventStatusText").value + "&"
 					+ "taskid=" + document.getElementById("eventTaskIDText").value + "&"
 					+ "public=" + document.getElementById("eventPublicText").value + "&"
 					+ "private=" + document.getElementById("eventPrivateText").value;
@@ -156,6 +157,7 @@
 					+ "taskid=" + document.getElementById("eventTaskIDText").value + "&"
 					+ "public=" + document.getElementById("eventPublicText").value + "&"
 					+ "private=" + document.getElementById("eventPrivateText").value + "&"
+					+ "taskeventstatusid=" + document.getElementById("eventStatusText").value + "&"
 					+ "eventid=" + eventID;
 	  var xhttp;
 	  xhttp = new XMLHttpRequest();
