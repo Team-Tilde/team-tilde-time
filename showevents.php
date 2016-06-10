@@ -17,7 +17,8 @@
 	
 	$sql = "SELECT e.event_id, ec.description as ecdescription, e.title, e.description, e.location, e.date_time_start, e.date_time_end FROM Event as e
 			JOIN eventcategory as ec ON e.event_category_id = ec.event_category_id
-			WHERE task_id = '" . $selected . "'";
+			WHERE task_id = '" . $selected . "' " . 
+			"ORDER BY e.date_time_end";
 	$result = $conn->query($sql);
 
 	if ($result->num_rows > 0) {
