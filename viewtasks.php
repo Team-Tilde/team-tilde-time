@@ -18,29 +18,8 @@
 		<?php
 			require_once "php/nav.php";
 		?>
-		<label>Select task:</label><select id="selectorTask" class='form-control' onchange='showTasksByTask(this.value)'>
-		<option value='0'>Select a task:</option>
 		<?php
-			$conn = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
-			
-			if ($conn->connect_error) {
-				die("Connection failed: " . $conn->connect_error);
-			}
-		
-			$sql = "SELECT task_id, description FROM Task";
-			$result = $conn->query($sql);
-			
-			if ($result->num_rows > 0) {
-				while($row = $result->fetch_assoc()) {
-					echo "<option value='" . $row['task_id'] . "'>" . $row['description'] . "</option>";
-				}
-			} else {
-				echo "No task found.";
-			}
-			
-			echo "</select>";
-			
-			$conn->close();
+			require_once "showtasks.php";
 		?>
 		<div id="taskData"></div>
 	</div>
@@ -93,11 +72,10 @@
 	}
 	
 	function insertTaskData() {
-		var param = "title=" + document.getElementById("taskTitleText").value + "&"
+		var param = "taskcategoryid=" + document.getElementById("taskCategoryText").value + "&"
+					+ "description=" + document.getElementById("taskNameText").value + "&"
 					+ "startdate=" + document.getElementById("taskStartDateText").value + "&"
-					+ "enddate=" + document.getElementById("taskEndDateText").value + "&"
-					+ "description=" + document.getElementById("taskDescriptionText").value + "&"
-					+ "taskid=" + document.getElementById("taskTaskIDText").value;
+					+ "enddate=" + document.getElementById("taskEndDateText").value;
 	  var xhttp;
 	  xhttp = new XMLHttpRequest();
 	  xhttp.onreadystatechange = function() {
@@ -143,13 +121,10 @@
 		document.getElementById("editTaskModalPlaceholder").innerHTML = "";
 		return;
 	  }
-	  var param = "title=" + document.getElementById("taskTitleText").value + "&"
+	  var param = "taskcategoryid=" + document.getElementById("taskCategoryText").value + "&"
+					+ "description=" + document.getElementById("taskDescriptionText").value + "&"
 					+ "startdate=" + document.getElementById("taskStartDateText").value + "&"
 					+ "enddate=" + document.getElementById("taskEndDateText").value + "&"
-					+ "description=" + document.getElementById("taskDescriptionText").value + "&"
-					+ "taskid=" + document.getElementById("taskTaskIDText").value + "&"
-					+ "public=" + document.getElementById("taskPublicText").value + "&"
-					+ "private=" + document.getElementById("taskPrivateText").value + "&"
 					+ "taskid=" + taskID;
 	  var xhttp;
 	  xhttp = new XMLHttpRequest();
@@ -170,7 +145,6 @@
 	  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	  xhttp.send(param);
 	  $('#editTaskModal').modal('hide');
-	  showTasksByTask(document.getElementById("selectorTask").value);
 	}
 	
 	function showDeleteTaskModal(taskID) {
@@ -264,7 +238,7 @@
 				</div>
 			</div>
 		</div>
-	</div>;
+	</div>
 	
 	<div id="editTaskModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
@@ -278,7 +252,7 @@
 				</div>
 			</div>
 		</div>
-	</div>;
+	</div>
 	
 	<div id="deleteTaskModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
@@ -292,7 +266,7 @@
 				</div>
 			</div>
 		</div>
-	</div>;
+	</div>
 	
 	<script src="scripts/jquery-1.9.1.min.js"></script>
     <script src="scripts/bootstrap.min.js"></script>

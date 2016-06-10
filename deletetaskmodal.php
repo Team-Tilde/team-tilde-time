@@ -12,12 +12,14 @@
 	
 	$taskID = mysqli_real_escape_string($conn, $_GET['task']);
 	
-	$sql = "SELECT e.task_id, e.task_id, e.title, e.description, e.date_time_start, e.date_time_end, t.description as tdescription FROM Task as e, Task as t WHERE e.task_id = '" . $taskID . "' AND e.task_id=t.task_id";
+	$sql = "SELECT t.task_id, tc.description as tcdescription, t.description, t.task_category_id, t.date_time_start, t.date_time_end FROM Task as t
+			JOIN taskcategory as tc ON t.task_category_id = tc.task_category_id
+			WHERE t.task_id = '" . $taskID . "'";
 	$result = $conn->query($sql);
 	
 	if ($result->num_rows > 0) {
 		while($row = $result->fetch_assoc()) {
-			echo "<p>Are you sure you want to delete:<br/>TASK " . $row['task_id'] . ": " . $row['title'] . " from TASK " . $row['task_id'] . ": " . $row['tdescription'] . "?</p>";
+			echo "<p>Are you sure you want to delete:<br/>TASK " . $row['task_id'] . ": " . $row['description'] . " and all its EVENTS?</p>";
 		}
 	}
 	else {

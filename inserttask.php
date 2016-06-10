@@ -6,15 +6,14 @@
 	if ($conn->connect_error) {
 		die("Connection failed: " . $conn->connect_error);
 	}
-	
-	$title = mysqli_real_escape_string($conn, $_POST['title']);
+
+	$taskcategoryid = mysqli_real_escape_string($conn, $_POST['taskcategoryid']);
+	$description = mysqli_real_escape_string($conn, $_POST['description']);
 	$startdate = mysqli_real_escape_string($conn, $_POST['startdate']);
 	$enddate = mysqli_real_escape_string($conn, $_POST['enddate']);
-	$description = mysqli_real_escape_string($conn, $_POST['description']);
-	$taskid = mysqli_real_escape_string($conn, $_POST['taskid']);
 	
-	$sql = "INSERT INTO Task (task_id, title, description, date_time_start, date_time_end)
-			VALUES ('" . $taskid . "','" . $title . "','" . $description . "','" . $startdate . "','" . $enddate . "')";
+	$sql = "INSERT INTO Task (description, task_category_id, date_time_start, date_time_end)
+			VALUES ('" . $description . "','" . $taskcategoryid . "','" . $startdate . "','" . $enddate . "')";
 	
 	if (mysqli_query($conn, $sql)) {
 		echo "0";
