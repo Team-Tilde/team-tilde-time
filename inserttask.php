@@ -11,9 +11,10 @@
 	$description = mysqli_real_escape_string($conn, $_POST['description']);
 	$startdate = mysqli_real_escape_string($conn, $_POST['startdate']);
 	$enddate = mysqli_real_escape_string($conn, $_POST['enddate']);
+	$taskeventstatusid = mysqli_real_escape_string($conn, $_POST['taskeventstatusid']);
 	
-	$sql = "INSERT INTO Task (description, task_category_id, date_time_start, date_time_end)
-			VALUES ('" . $description . "','" . $taskcategoryid . "','" . $startdate . "','" . $enddate . "')";
+	$sql = "INSERT INTO Task (description, task_category_id, date_time_start, date_time_end, task_event_status_id)
+			VALUES ('" . $description . "','" . $taskcategoryid . "','" . $startdate . "','" . $enddate . "','" . $taskeventstatusid . "')";
 	
 	if (mysqli_query($conn, $sql)) {
 		echo "0";

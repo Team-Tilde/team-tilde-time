@@ -75,7 +75,8 @@
 		var param = "taskcategoryid=" + document.getElementById("taskCategoryText").value + "&"
 					+ "description=" + document.getElementById("taskNameText").value + "&"
 					+ "startdate=" + document.getElementById("taskStartDateText").value + "&"
-					+ "enddate=" + document.getElementById("taskEndDateText").value;
+					+ "enddate=" + document.getElementById("taskEndDateText").value + "&"
+					+ "taskeventstatusid=" + document.getElementById("eventStatusText").value + "&";
 	  var xhttp;
 	  xhttp = new XMLHttpRequest();
 	  xhttp.onreadystatechange = function() {
@@ -125,6 +126,7 @@
 					+ "description=" + document.getElementById("taskDescriptionText").value + "&"
 					+ "startdate=" + document.getElementById("taskStartDateText").value + "&"
 					+ "enddate=" + document.getElementById("taskEndDateText").value + "&"
+					+ "taskeventstatusid=" + document.getElementById("eventStatusText").value + "&"
 					+ "taskid=" + taskID;
 	  var xhttp;
 	  xhttp = new XMLHttpRequest();

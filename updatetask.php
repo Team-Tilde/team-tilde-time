@@ -12,9 +12,11 @@
 	$description = mysqli_real_escape_string($conn, $_POST['description']);
 	$startdate = mysqli_real_escape_string($conn, $_POST['startdate']);
 	$enddate = mysqli_real_escape_string($conn, $_POST['enddate']);
+	$taskeventstatusid = mysqli_real_escape_string($conn, $_POST['taskeventstatusid']);
 	
 	$sql = "UPDATE Task SET task_category_id='" . $taskcategoryid . 
-								"', description='" . $description . "', date_time_start='" . $startdate . "', date_time_end='" . $enddate . "' " .
+								"', description='" . $description . "', date_time_start='" . $startdate . "', date_time_end='" . $enddate .
+								"', task_event_status_id='" . $taskeventstatusid . "' " .
 								"WHERE task_id ='" . $taskid . "'";
 	
 	if (mysqli_query($conn, $sql)) {

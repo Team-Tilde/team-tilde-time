@@ -10,7 +10,7 @@
 	
 	$taskID = mysqli_real_escape_string($conn ,$_GET['task']);
 	
-	$sql = "SELECT t.task_id, tc.description as tcdescription, t.description, t.task_category_id, t.date_time_start, t.date_time_end FROM Task as t, TaskCategory as tc
+	$sql = "SELECT t.task_id, tc.description as tcdescription, t.description, t.task_category_id, t.date_time_start, t.date_time_end, t.task_event_status_id FROM Task as t, TaskCategory as tc
 			WHERE task_id = '" . $taskID . "'";
 	
 	$result = $conn->query($sql);
@@ -28,6 +28,7 @@
 			$description = $row['description'];
 			$start_date = $row['date_time_start'];
 			$end_date = $row['date_time_end'];
+			$task_event_status_id = $row['task_event_status_id'];
 		}
 	} else {
 		echo "No tasks found.";
@@ -77,6 +78,33 @@
 				<label class="col-sm-2 control-label">End Date/Time:</label>
 				<div class="col-sm-10">
 				<input id="taskEndDateText" type="text" class="form-control" value="' . $end_date . '">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Event Status:</label>
+				<div class="col-sm-10">
+					<select id="eventStatusText" class="form-control">';
+						
+						$sql = "SELECT task_event_status_id, status FROM TaskEventStatus";
+						$result = $conn->query($sql);
+						
+						if ($result->num_rows > 0) {
+							while($row = $result->fetch_assoc()) {
+								if ($task_event_status_id === $row['task_event_status_id'])
+								{
+									echo "<option value='" . $row['task_event_status_id'] . "' selected='selected'>" . $row['status'] . "</option>";
+								}
+								else
+								{
+									echo "<option value='" . $row['task_event_status_id'] . "'>" . $row['status'] . "</option>";
+								}	
+							}
+						}
+						else {
+							echo "<option>'No task found'</option>";
+						}
+					
+					echo '</select>
 				</div>
 			</div>
 			<div class="form-group">

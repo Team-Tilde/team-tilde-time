@@ -11,8 +11,9 @@
 	{
 		$taskID = mysqli_real_escape_string($conn ,$_GET['task']);
 		
-		$sql = "SELECT t.task_id, tc.description as tcdescription, t.description, t.task_category_id, t.date_time_start, t.date_time_end FROM Task as t
+		$sql = "SELECT t.task_id, tc.description as tcdescription, t.description, t.task_category_id, t.date_time_start, t.date_time_end, tes.status FROM Task as t
 			JOIN taskcategory as tc ON t.task_category_id = tc.task_category_id
+			JOIN TaskEventStatus as tes ON t.task_event_status_id = tes.task_event_status_id
 			WHERE t.task_id = '" . $taskID . "'";
 		$result = $conn->query($sql);
 
@@ -24,6 +25,8 @@
 				echo "<p><label>Task Name: </label>" . $row['description'] . "</p>";
 				echo "<p><label>Event Start Date/Time: </label>" . $row['date_time_start'] . "</p>";
 				echo "<p><label>Event End Date/Time: </label>" . $row['date_time_end'] . "</p>";
+				echo "<p><label>Event End Date/Time: </label>" . $row['date_time_end'] . "</p>";
+				echo "<p><label>Status: </label>" . $row['status'] . "</p>";
 			}
 		} else {
 			echo "No tasks found.";
