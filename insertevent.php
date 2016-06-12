@@ -16,9 +16,10 @@
 	$taskid = mysqli_real_escape_string($conn, $_POST['taskid']);
 	$public = mysqli_real_escape_string($conn, $_POST['public']);
 	$private = mysqli_real_escape_string($conn, $_POST['private']);
+	$taskeventstatusid = mysqli_real_escape_string($conn, $_POST['taskeventstatusid']);
 	
-	$sql = "INSERT INTO Event (task_id, event_category_id, title, location, public, private, description, date_time_start, date_time_end)
-			VALUES ('" . $taskid . "','" . $eventcategoryid . "','" . $title . "','" . $location . "','" . $public . "','" . $private . "','" . $description . "','" . $startdate . "','" . $enddate . "')";
+	$sql = "INSERT INTO Event (task_id, event_category_id, title, location, public, private, description, date_time_start, date_time_end, task_event_status_id)
+			VALUES ('" . $taskid . "','" . $eventcategoryid . "','" . $title . "','" . $location . "','" . $public . "','" . $private . "','" . $description . "','" . $startdate . "','" . $enddate . "','" . $taskeventstatusid . "')";
 	
 	if (mysqli_query($conn, $sql)) {
 		echo "0";

@@ -10,7 +10,7 @@
 	
 	$eventID = mysqli_real_escape_string($conn ,$_GET['event']);
 	
-	$sql = "SELECT e.event_category_id, e.title, e.description, e.location, e.public, e.private, e.date_time_start, e.date_time_end, e.task_id FROM Event as e
+	$sql = "SELECT e.event_category_id, e.title, e.description, e.location, e.public, e.private, e.date_time_start, e.date_time_end, e.task_id, e.task_event_status_id FROM Event as e
 			WHERE event_id = '" . $eventID . "'";
 	
 	$result = $conn->query($sql);
@@ -32,6 +32,7 @@
 			$public = $row['public'];
 			$private = $row['private'];
 			$taskid = $row['task_id'];
+			$task_event_status_id = $row['task_event_status_id'];
 		}
 	} else {
 		echo "No events found.";
@@ -153,6 +154,33 @@
 							echo '<option value="1">Yes</option>
 									<option value="0" selected="selected">No</option>';
 						}
+					echo '</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Event Status:</label>
+				<div class="col-sm-10">
+					<select id="eventStatusText" class="form-control">';
+						
+						$sql = "SELECT task_event_status_id, status FROM TaskEventStatus";
+						$result = $conn->query($sql);
+						
+						if ($result->num_rows > 0) {
+							while($row = $result->fetch_assoc()) {
+								if ($task_event_status_id === $row['task_event_status_id'])
+								{
+									echo "<option value='" . $row['task_event_status_id'] . "' selected='selected'>" . $row['status'] . "</option>";
+								}
+								else
+								{
+									echo "<option value='" . $row['task_event_status_id'] . "'>" . $row['status'] . "</option>";
+								}	
+							}
+						}
+						else {
+							echo "<option>'No task found'</option>";
+						}
+					
 					echo '</select>
 				</div>
 			</div>

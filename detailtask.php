@@ -11,19 +11,22 @@
 	{
 		$taskID = mysqli_real_escape_string($conn ,$_GET['task']);
 		
-		$sql = "SELECT e.task_id, e.title, e.description, e.date_time_start, e.date_time_end, t.description as tdescription, tc.description as tcdescription FROM Task as e, Task as t, TaskCategory as tc WHERE e.task_id = '" . $taskID . "' AND e.task_id=t.task_id AND t.task_category_id=tc.task_category_id";
+		$sql = "SELECT t.task_id, tc.description as tcdescription, t.description, t.task_category_id, t.date_time_start, t.date_time_end, tes.status FROM Task as t
+			JOIN taskcategory as tc ON t.task_category_id = tc.task_category_id
+			JOIN TaskEventStatus as tes ON t.task_event_status_id = tes.task_event_status_id
+			WHERE t.task_id = '" . $taskID . "'";
 		$result = $conn->query($sql);
 
 		if ($result->num_rows > 0) {
 			
 			while($row = $result->fetch_assoc()) {
-				echo "<p><label>Task Title: </label>" . $row['tdescription'] . "</p>";
+				echo "<p><label>Task Number: </label>" . $row['task_id'] . "</p>";
 				echo "<p><label>Task Category: </label>" . $row['tcdescription'] . "</p>";
-				echo "<p><label>Task ID: </label>" . $row['task_id'] . "</p>";
-				echo "<p><label>Task Title: </label>" . $row['title'] . "</p>";
-				echo "<p><label>Task Description: </label>" . $row['description'] . "</p>";
-				echo "<p><label>Task Start Date/Time: </label>" . $row['date_time_start'] . "</p>";
-				echo "<p><label>Task End Date/Time: </label>" . $row['date_time_end'] . "</p>";
+				echo "<p><label>Task Name: </label>" . $row['description'] . "</p>";
+				echo "<p><label>Event Start Date/Time: </label>" . $row['date_time_start'] . "</p>";
+				echo "<p><label>Event End Date/Time: </label>" . $row['date_time_end'] . "</p>";
+				echo "<p><label>Event End Date/Time: </label>" . $row['date_time_end'] . "</p>";
+				echo "<p><label>Status: </label>" . $row['status'] . "</p>";
 			}
 		} else {
 			echo "No tasks found.";
