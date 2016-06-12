@@ -81,7 +81,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">Event Status:</label>
+				<label class="col-sm-2 control-label">Task Status:</label>
 				<div class="col-sm-10">
 					<select id="eventStatusText" class="form-control">';
 						

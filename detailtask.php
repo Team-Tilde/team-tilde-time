@@ -23,9 +23,8 @@
 				echo "<p><label>Task Number: </label>" . $row['task_id'] . "</p>";
 				echo "<p><label>Task Category: </label>" . $row['tcdescription'] . "</p>";
 				echo "<p><label>Task Name: </label>" . $row['description'] . "</p>";
-				echo "<p><label>Event Start Date/Time: </label>" . $row['date_time_start'] . "</p>";
-				echo "<p><label>Event End Date/Time: </label>" . $row['date_time_end'] . "</p>";
-				echo "<p><label>Event End Date/Time: </label>" . $row['date_time_end'] . "</p>";
+				echo "<p><label>Task Start Date/Time: </label>" . $row['date_time_start'] . "</p>";
+				echo "<p><label>Task End Date/Time: </label>" . $row['date_time_end'] . "</p>";
 				echo "<p><label>Status: </label>" . $row['status'] . "</p>";
 			}
 		} else {
