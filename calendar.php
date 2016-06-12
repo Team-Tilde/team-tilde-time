@@ -17,13 +17,13 @@
 	</head>
 	
 	<body>
-		<script src="scripts/jquery-1.9.1.min.js"></script>
-		<script src="scripts/bootstrap.min.js"></script>
-		<script src="scripts/moment.js"></script>
-		<script src="scripts/calendar.js"></script>
-		<script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
-		<script src="scripts/bootstrap-datetimepicker.min.js"></script>
-
+		<script src="scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
+		<script src="scripts/bootstrap.min.js" type="text/javascript"></script>
+		<script src="scripts/moment.js" type="text/javascript"></script>
+		<script src="scripts/calendar.js" type="text/javascript"></script>
+		<script src="https://code.createjs.com/easeljs-0.8.2.min.js" type="text/javascript"></script>
+		<script src="scripts/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+		
 		<div class="container">
 			<?php
 				require_once "php/nav.php";
@@ -35,7 +35,7 @@
 				<div class="col-md-1"><span class="glyphicon glyphicon-menu-left"></span></div>
 				<div class="col-md-10">
 					<a href="#" data-toggle="popover" title="Date Selector" data-placement="bottom" data-trigger="focus" data-content="">
-			 		<h4 id="dateval">Current date here</h4>
+			 		<h4 id="dateval"></h4>
 					</a>
 				</div>
 				<div class="col-md-1"><span class="glyphicon glyphicon-menu-right"></span></div>
@@ -47,6 +47,22 @@
 					<script>
 						prepareCanvas();
 					</script>
+				</div>
+			</div>
+		</div>
+		
+		<div id="eventDetailModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Event Details</h4>
+					</div>
+					<div id="eventDetail" class="modal-body">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
 				</div>
 			</div>
 		</div>

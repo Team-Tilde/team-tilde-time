@@ -1,26 +1,33 @@
-var date = new Date();
-var _format = 'dddd, Do MMMM YYYY'
+var _date;
+var _format = 'dddd, Do MMMM YYYY';
 
 function dt() {
 	$(function () {
 		$('#date').datetimepicker({
 			inline: true,
 			sideBySide: false,
-			defaultDate: date
-			});
+			defaultDate: _date
+		});
+		
 		$('#date').on("dp.change", function (e) {
-			date = $('#date').data('DateTimePicker').date();
-			$('#dateval').text(date.format(_format));
+			_date = $('#date').data('DateTimePicker').date();
+			$('#dateval').text(_date.format(_format));
+			performQuery();
 			$('[data-toggle="popover"]').blur();
 			$('[data-toggle="popover"]').popover("hide");
 		});
 	});
 }
 
+function dateInit() {
+	_date = moment();
+	$('#dateval').text(_date.format(_format));
+}
+
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover({
 		html: true,
-		content: "<div id=\"date\"></div><script>dt();</script>"
+		content: "<div id=\"date\"></div><script>dt();<\/script>" // Embedded end script element breaks js, remember to split it.
 	});
 });
 
@@ -42,43 +49,61 @@ var rowTimeMultiplier = 4;
 var reqData; 				// event_id, title, description, date_time_start, date_time_end
 
 function draw() {
-	divWidth = canvas.width() / divisions;
+	stage.clear(); // Clear the stage first so we can redraw as needed
+	
+	divWidth = canvas.width() / divisions; // Temporary, figure out columns by collision
 
-	//ctx.fillStyle = bgColor;
-	//ctx.font = "16px verdana";
-	//ctx.textAlign  = "center";
 	for(var i = 0; i < reqData.length; ++i) {
-		var tLength = timeCalc(reqData[i].date_time_start, reqData[i].date_time_end);
+		var tLength = timeCalc(reqData[i].date_time_start, reqData[i].date_time_end); 
+		var objTSlot = moment(reqData[i].date_time_start, moment.ISO_8601).toObject();
+		
+		console.log(objTSlot['hours']);
+		var tSlot = objTSlot['hours'] * 2;
+		var tMinSlot = (objTSlot['minutes'] > 0) ? rowHeight : 0;
+		console.log(tSlot);
+		
 		if(tLength != 0) {
 			var container = new createjs.Container();
 
 			var box = new createjs.Shape();
-			box.graphics.beginFill(bgColor).drawRect(0, rowHeight * 0, divWidth, rowHeight * (tLength * 2 - 2))
+			box.graphics.beginStroke("#000");
+			box.graphics.setStrokeStyle(1);
+			box.graphics.beginFill(bgColor).drawRect(0, 0, divWidth, rowHeight * (tLength * 2) + tMinSlot);
 			container.addChild(box);
 
 			var bText = new createjs.Text(reqData[i].title, "16px verdana", "white");
 			bText.x = divWidth * .5;
-			bText.y = (i == 1) ? rowHeight * .65 : (rowHeight * (tLength * 2 - 2)) * .51;
+			bText.y = (i == 1) ? rowHeight * .65 : (rowHeight * (tLength * 1.85)) * .51;
 			bText.textAlign = "center";
 			container.addChild(bText);
 
-			container.x = 0
-			container.y = rowHeight * 0;
+			container.x = 0;
+			container.y = rowHeight * tSlot + tMinSlot;
 
 			container.on("click", handleClick, null, false, reqData[i]);
 			stage.addChild(container);
 
 			stage.update();
-			//ctx.fillStyle = bgColor;
-			//ctx.fillRect(0, rowHeight * 0, divWidth, rowHeight * (tLength * 2 - 2));  // x, y, w, h
-			//ctx.fillStyle = "white";
-			//ctx.fillText(reqData[i].title, divWidth * (.5 + colMultiplier), (rowTimeMultiplier == 1) ? rowHeight * .65 : (rowHeight * (tLength * 2 - 2)) * .51);
 		}
 	}
 }
 
+// Used to display event data, WIP
 function handleClick(event, data) {
-	console.log(data);
+	var xhttp;    
+	if (eventID == "") {
+		document.getElementById("eventDetail").innerHTML = "";
+		return;
+	}
+	xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (xhttp.readyState == 4 && xhttp.status == 200) {
+			document.getElementById("eventDetail").innerHTML = xhttp.responseText;
+		}
+	};
+	xhttp.open("GET", "detailevent.php?event="+eventID, true);
+	xhttp.send();
+	$('#eventDetailModal').modal('show');
 }
 
 function timeCalc(tStart, tEnd) {
@@ -90,49 +115,65 @@ function timeCalc(tStart, tEnd) {
 	if(diff > 24 || diff == 0) {
 		return 0;
 	}
-	console.log(diff);
 	return diff;
 }
 
 function prepareCanvas() {
 	drawTimeColumn();
+	dateInit();
 
 	// Wait for page load to get the correct dimensions of the canvas element
 	$(window).load(function() {
 		canvas = $('#calendar_drawarea');
-
 		// Once loaded, scale the canvas to the css values
 		canvas[0].width = canvas.width();
 		canvas[0].height = canvas.height();
 
 		ctx = canvas[0].getContext("2d");
 		stage = new createjs.Stage("calendar_drawarea");
+		performQuery();
 	});
 
+
+}
+
+function performQuery() {
 	// Finally, make an ajax call to prep data
 	$.ajax({
 		method: "POST",
 		url: "php/calendarquery.php",
+		//data: {"date": _date.format("2016-05-08")},
+		data: {"date": _date.format("YYYY-MM-DD")},
 		success: function(data) {
-			reqData = data;
-			divisions = reqData.length;
-			draw();
+			if(data != null) {
+				reqData = data;
+				divisions = reqData.length;
+				draw();
+			} else {
+				stage.clear();
+			}
 		},
 		dataType: "json"
 	});
 }
 
 function drawTimeColumn() {
-	for (i = 1; i < 25; ++i) {
+	document.write("<div class=\"row\" id=\"time_whole\">\
+						<div class=\"col-md-1\" id=\"time_whole_item\">12</div>\
+					</div>\
+					<div class=\"row\" id=\"time_half\">\
+						<div class=\"col-md-1\" id=\"time_half_item\">12:30</div>\
+					</div>");
+
+	for (i = 1; i < 24; ++i) {
 		var ev = (i < 13) ? i : i - 12;
-		document.write("  <div class=\"row\" id=\"time_whole\">");
-		document.write("    <div class=\"col-md-1\" id=\"time_whole_item\">" + ev + "</div>");
-		document.write("  </div>");
-		document.write("  <div class=\"row\" id=\"time_half\"");
-		if (i == 12) {
+		document.write("<div class=\"row\" id=\"time_whole\">\
+							<div class=\"col-md-1\" id=\"time_whole_item\">" + ev + "</div>\
+						</div>\
+						<div class=\"row\" id=\"time_half\"");
+		if(i == 12) {
 			document.write("style=\"border-bottom: 3px double #007cc3;\"");
 		}
-		document.write(">   <div class=\"col-md-1\" id=\"time_half_item\">" + (ev + 0.3) + "0</div>");
-		document.write("  </div>");
+		document.write("><div class=\"col-md-1\" id=\"time_half_item\">" + (ev + 0.3) + "0</div></div>");
 	}
 }
