@@ -6,6 +6,7 @@
 <head>
 	<title>View Events</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="css/nav.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -98,6 +99,8 @@
 					+ "enddate=" + document.getElementById("eventEndDateText").value + "&"
 					+ "description=" + document.getElementById("eventDescriptionText").value + "&"
 					+ "location=" + document.getElementById("eventLocationText").value + "&"
+					+ "eventcategoryid=" + document.getElementById("eventCategoryText").value + "&"
+					+ "taskeventstatusid=" + document.getElementById("eventStatusText").value + "&"
 					+ "taskid=" + document.getElementById("eventTaskIDText").value + "&"
 					+ "public=" + document.getElementById("eventPublicText").value + "&"
 					+ "private=" + document.getElementById("eventPrivateText").value;
@@ -151,9 +154,11 @@
 					+ "enddate=" + document.getElementById("eventEndDateText").value + "&"
 					+ "description=" + document.getElementById("eventDescriptionText").value + "&"
 					+ "location=" + document.getElementById("eventLocationText").value + "&"
+					+ "eventcategoryid=" + document.getElementById("eventCategoryText").value + "&"
 					+ "taskid=" + document.getElementById("eventTaskIDText").value + "&"
 					+ "public=" + document.getElementById("eventPublicText").value + "&"
 					+ "private=" + document.getElementById("eventPrivateText").value + "&"
+					+ "taskeventstatusid=" + document.getElementById("eventStatusText").value + "&"
 					+ "eventid=" + eventID;
 	  var xhttp;
 	  xhttp = new XMLHttpRequest();
@@ -268,7 +273,7 @@
 				</div>
 			</div>
 		</div>
-	</div>;
+	</div>
 	
 	<div id="editEventModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
@@ -282,7 +287,7 @@
 				</div>
 			</div>
 		</div>
-	</div>;
+	</div>
 	
 	<div id="deleteEventModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
@@ -296,7 +301,7 @@
 				</div>
 			</div>
 		</div>
-	</div>;
+	</div>
 	
 	<script src="scripts/jquery-1.9.1.min.js"></script>
     <script src="scripts/bootstrap.min.js"></script>

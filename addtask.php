@@ -3,9 +3,35 @@
 
 	echo '<form id="addTaskForm" class="form-horizontal">
 			<div class="form-group">
-				<label class="col-sm-2 control-label">Task Title:</label>
+				<label class="col-sm-2 control-label">Task Category:</label>
 				<div class="col-sm-10">
-					<input id="taskTitleText" type="text" class="form-control" placeholder="Task Title">
+					<select id="taskCategoryText" class="form-control">';
+						 
+						$conn = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
+						
+						if ($conn->connect_error) {
+							die("Connection failed: " . $conn->connect_error);
+						}
+						
+						$sql = "SELECT task_category_id, description FROM TaskCategory";
+						$result = $conn->query($sql);
+						
+						if ($result->num_rows > 0) {
+							while($row = $result->fetch_assoc()) {
+								echo "<option value='" . $row['task_category_id'] . "'>" . $row['description'] . "</option>";
+							}
+						}
+						else {
+							echo "<option>'No task found'</option>";
+						}
+					
+					echo '</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Task Name:</label>
+				<div class="col-sm-10">
+					<input id="taskNameText" type="text" class="form-control" placeholder="Task Name">
 				</div>
 			</div>
 			<div class="form-group">
@@ -21,15 +47,9 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">Description:</label>
+				<label class="col-sm-2 control-label">Task Status:</label>
 				<div class="col-sm-10">
-				<textarea id="taskDescriptionText" class="form-control" rows="5" placeholder="Description"></textarea>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Assign Tasks To:</label>
-				<div class="col-sm-10">
-					<select id="taskTaskIDText" class="form-control">';
+					<select id="eventStatusText" class="form-control">';
 						 
 						$conn = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
 						
@@ -37,12 +57,12 @@
 							die("Connection failed: " . $conn->connect_error);
 						}
 						
-						$sql = "SELECT task_id, description FROM Task";
+						$sql = "SELECT task_event_status_id, status FROM TaskEventStatus";
 						$result = $conn->query($sql);
 						
 						if ($result->num_rows > 0) {
 							while($row = $result->fetch_assoc()) {
-								echo "<option value='" . $row['task_id'] . "'>" . $row['description'] . "</option>";
+								echo "<option value='" . $row['task_event_status_id'] . "'>" . $row['status'] . "</option>";
 							}
 						}
 						else {

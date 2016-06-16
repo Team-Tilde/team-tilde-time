@@ -6,16 +6,11 @@
 	if ($conn->connect_error) {
 		die("Connection failed: " . $conn->connect_error);
 	}
-	
-	$selected = mysqli_real_escape_string($conn ,$_GET['task']);
-	
-	$sql = "SELECT description FROM Task WHERE task_id = '" . $selected . "'";
-	$result = mysqli_query($conn, $sql);
-	$arow = mysqli_fetch_row($result);
-	
-	echo "<h2>$arow[0]</h2>";
-	
-	$sql = "SELECT task_id, title, description, date_time_start, date_time_end FROM Task WHERE task_id = '" . $selected . "'";
+
+	$sql = "SELECT t.task_id, tc.description as tcdescription, t.description, t.task_category_id, t.date_time_start, t.date_time_end, tes.status FROM Task as t
+			JOIN taskcategory as tc ON t.task_category_id = tc.task_category_id
+			JOIN TaskEventStatus as tes ON t.task_event_status_id = tes.task_event_status_id
+			WHERE t.date_time_end > t.date_time_start"; //might be what tharanga wants
 	$result = $conn->query($sql);
 
 	if ($result->num_rows > 0) {
@@ -23,11 +18,12 @@
 		echo "<table id='tableTasks' class='table table-hover'>
 					<tr>
 						<td width='1%'><strong><input id='checkSelectAll' type='checkbox' value='All' onchange='checkAll()'></strong></td>
-						<td width='15%'><strong>Task Number</strong></td>
-						<td width='15%'><strong>Task Name</strong></td>
-						<td width='34%'><strong>Description</strong></td>
-						<td width='15%'><strong>Start Date</strong></td>
-						<td width='15%'><strong>Finish Date</strong></td>
+						<td width='4%'><strong>Task Number</strong></td>
+						<td width='10%'><strong>Task Category</strong></td>
+						<td width='20%'><strong>Task Description</strong></td>
+						<td width='10%'><strong>Start Date</strong></td>
+						<td width='10%'><strong>Finish Date</strong></td>
+						<td width='4%'><strong>Status</strong></td>
 						<td width='5%'><strong>Options</strong></td>
 					<tr>";
 		
@@ -37,11 +33,12 @@
 			
 			echo "<tr>
 					<td width='1%'><label><input class='checkSelect' type='checkbox' value='" . $row['task_id'] . "'></label></td>
-					<td width='15%'><p>Task " . $row['task_id'] .  "</p></td>
-					<td width='15%'><p>" . $row['title'] . "</p></td>
-					<td width='34%'><p>" . $row['description'] . "</p></td>
-					<td width='15%'><p>" . date_format($start_date, 'l jS F Y h:i a') . "</p></td>
-					<td width='15%'><p>" . date_format($end_date, 'l jS F Y h:i a') . "</p></td>
+					<td width='4%'><p>Task " . $row['task_id'] .  "</p></td>
+					<td width='10%'><p>" . $row['tcdescription'] . "</p></td>
+					<td width='20%'><p>" . $row['description'] . "</p></td>
+					<td width='10%'><p>" . date_format($start_date, 'l jS F Y h:i a') . "</p></td>
+					<td width='10%'><p>" . date_format($end_date, 'l jS F Y h:i a') . "</p></td>
+					<td width='4%'><p>" . $row['status'] . "</p></td>
 					<td width='5%'><p><a href='#'" . $row['task_id'] . " title='"  . $row['task_id'] . "' onclick='showTaskDetails(this.title)'><span class='glyphicon glyphicon-search'></span></a>
 							<a href='#'" . $row['task_id'] . " title='"  . $row['task_id'] . "' onclick='showEditTaskModal(this.title)'><span class='glyphicon glyphicon-pencil'></span></a>
 							<a href='#'" . $row['task_id'] . " title='"  . $row['task_id'] . "' onclick='showDeleteTaskModal(this.title)'><span class='glyphicon glyphicon-trash'></span></a></p></td>

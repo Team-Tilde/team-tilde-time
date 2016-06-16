@@ -7,16 +7,17 @@
 		die("Connection failed: " . $conn->connect_error);
 	}
 	
-	$title = mysqli_real_escape_string($conn, $_POST['title']);
+	$taskid = mysqli_real_escape_string($conn, $_POST['taskid']);
+	$taskcategoryid = mysqli_real_escape_string($conn, $_POST['taskcategoryid']);
+	$description = mysqli_real_escape_string($conn, $_POST['description']);
 	$startdate = mysqli_real_escape_string($conn, $_POST['startdate']);
 	$enddate = mysqli_real_escape_string($conn, $_POST['enddate']);
-	$description = mysqli_real_escape_string($conn, $_POST['description']);
-	$taskid = mysqli_real_escape_string($conn, $_POST['taskid']);
-	$tasknumber = mysqli_real_escape_string($conn, $_POST['taskcategoryid']);
+	$taskeventstatusid = mysqli_real_escape_string($conn, $_POST['taskeventstatusid']);
 	
-	$sql = "UPDATE Task SET task_id='" . $taskid . "',title='" . $title . 
-								"', description='" . $description . "', date_time_start='" . $startdate . "', date_time_end='" . $enddate . "' " .
-								"WHERE taskcategoryid ='" . $taskcategoryid . "'";
+	$sql = "UPDATE Task SET task_category_id='" . $taskcategoryid . 
+								"', description='" . $description . "', date_time_start='" . $startdate . "', date_time_end='" . $enddate .
+								"', task_event_status_id='" . $taskeventstatusid . "' " .
+								"WHERE task_id ='" . $taskid . "'";
 	
 	if (mysqli_query($conn, $sql)) {
 		echo "0";
