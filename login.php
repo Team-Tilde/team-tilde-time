@@ -3,6 +3,7 @@
 <head>
 	<link href="css/signin.css" rel="stylesheet" type="text/css">
 	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="css/nav.css" rel="stylesheet" type="text/css">
 	<title>Login</title>
 </head>
 
@@ -43,8 +44,8 @@
 		
     </div>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+	<script src="scripts/jquery-1.9.1.min.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
 
 </body>
 
