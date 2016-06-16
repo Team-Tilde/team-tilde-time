@@ -28,13 +28,20 @@ function echoActiveMenu($wordInUrl)
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">Tildes</a>
+			<a class="navbar-brand" href="#"><img class="title-icon" src="images/tilde_logo2.png" width="40px" height="40px"></a>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li><a href="#">Messages</a></li>
-				<li <?php echoActiveClass("calendar");?>><a href="calendar.php">Calendar</a></li>
-				<li <?php echoActiveMenu("task");?> class="dropdown">
+				<li <?php echoActiveMenu("calendar");?> dropdown">
+					<a href="calendar.php" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Calendar <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li class="dropdown-header">Tasks</li>
+						<li <?php echoActiveClass("calendar");?> ><a href="calendar.php">Day Calendar</a></li>
+						<li <?php echoActiveClass("calendar-month");?> ><a href="calendar-month.html">Month Calendar</a></li>
+					</ul>
+				</li>
+				<li <?php echoActiveMenu("task");?> dropdown">
 					<a href="viewtasks.php" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tasks <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li class="dropdown-header">Tasks</li>
