@@ -14,6 +14,7 @@
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 		<link href="css/custom.css" rel="stylesheet">
+		<link href="css/nav.css" rel="stylesheet">
 	</head>
 	
 	<body>

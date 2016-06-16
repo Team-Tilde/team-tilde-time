@@ -1,3 +1,9 @@
+<?php
+	session_start();
+	require_once "php/auth.php";
+	require_login();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,22 +13,23 @@
 	<title>Month View</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/custom.css" rel="stylesheet">
+	<link href="css/nav.css" rel="stylesheet">
 </head>
-<body>
-
-	<?php
-	//session_start();
-	//require_once "php/auth.php";
-	//require_once "php/crypt.php";
-	?>
-	
+<body>	
 	<script src="scripts/jquery-1.9.1.min.js"></script>
+	<script src="scripts/bootstrap.min.js"></script>
+	
+	<div class="container">
+		<?php
+			require_once "php/nav.php";
+		?>
+	</div>
+
 	<script>
 	$(document).ready(function(){
 		$('[data-toggle="popover"]').popover();
 	});
 	</script>
-	<script src="scripts/bootstrap.min.js"></script>
 
 	<div class="container-fluid" id="day_container">
 		<div class="row" id="day_header">
