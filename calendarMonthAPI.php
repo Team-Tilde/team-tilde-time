@@ -5,7 +5,8 @@
 	$myArray = array();
 	if ($result = $mysqli->query("SELECT * FROM event")) {
 
-		while($row = $result->fetch_array(MYSQL_ASSOC)) {
+		//while($row = $result->fetch_array(MYSQL_ASSOC)) {
+		while($row = mysqli_fetch_assoc($result)) {
 				$myArray[] = $row;
 		}
 		echo json_encode($myArray);
@@ -13,8 +14,5 @@
 
 	$result->close();
 	$mysqli->close();
-	
-	
-	
-	
+
 ?>
