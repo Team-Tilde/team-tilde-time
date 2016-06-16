@@ -41,7 +41,8 @@
 	position: absolute;
 	left: 7%;
 	height: 100%;
-	width: 100%;
+	width: 93%;
+	padding-right: 7%;
 	border-left: 1px dashed #007cc3
 }
 

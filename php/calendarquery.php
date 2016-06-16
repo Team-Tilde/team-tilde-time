@@ -8,8 +8,15 @@
 		die("Connection failed: " . $conn->connect_error);
 	}
 
-	$sql = "SELECT event_id, title, description, date_time_start, date_time_end FROM event WHERE date_time_start BETWEEN \"".$_POST["date"]." 00:00:00\" AND \"".$_POST["date"]." 23:59:59\"";
-	$result = $conn->query($sql);
+	preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $_POST["date"], $date);
+	
+	if($date != null) {
+		$sql = "SELECT event_id, title, description, date_time_start, date_time_end FROM event WHERE date_time_start BETWEEN \"".$date[0]." 00:00:00\" AND \"".$date[0]." 23:59:59\"";
+		$result = $conn->query($sql);
+	} else {
+		echo "Nope";
+		die();
+	}
 
 	if ($result->num_rows > 0) {
 		$data = array();

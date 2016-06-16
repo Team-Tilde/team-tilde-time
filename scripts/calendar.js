@@ -47,10 +47,9 @@ var colMultiplier = 0;		// The current working task, used to position rect and t
 var rowTimeMultiplier = 4;
 
 var reqData; 				// event_id, title, description, date_time_start, date_time_end
+var containerStore = new Array();
 
 function draw() {
-	stage.clear(); // Clear the stage first so we can redraw as needed
-	
 	divWidth = canvas.width() / divisions; // Temporary, figure out columns by collision
 
 	for(var i = 0; i < reqData.length; ++i) {
@@ -64,6 +63,8 @@ function draw() {
 		
 		if(tLength != 0) {
 			var container = new createjs.Container();
+			containerStore.push(container);
+			container.name = "event" + i;
 
 			var box = new createjs.Shape();
 			box.graphics.beginStroke("#000");
@@ -73,12 +74,13 @@ function draw() {
 
 			var bText = new createjs.Text(reqData[i].title, "16px verdana", "white");
 			bText.x = divWidth * .5;
-			bText.y = (i == 1) ? rowHeight * .65 : (rowHeight * (tLength * 1.85)) * .51;
+			bText.y = rowHeight * (tLength - .2) + tMinSlot;
+			//bText.y = (i == 1) ? rowHeight * .65 : (rowHeight * (tLength * 1.85)) * .51;
 			bText.textAlign = "center";
 			container.addChild(bText);
 
-			container.x = 0;
 			container.y = rowHeight * tSlot + tMinSlot;
+			container.x = collideCheck(container);
 
 			container.on("click", handleClick, null, false, reqData[i]);
 			stage.addChild(container);
@@ -88,10 +90,29 @@ function draw() {
 	}
 }
 
+function collideCheck(container) {
+	var collideCheck = true;
+	var push = 0;
+	
+	while(collideCheck) {
+		var hits = stage.getObjectsUnderPoint(container.x, container.y + push, 0);
+		collideCheck = false;
+		for(var x = 0; x < hits.length; ++hits) {
+			if(hits[x].parent.name.includes("event") && hits[x].parent.name != container.name) {
+				push += divWidth;
+				collideCheck = true;
+			}
+		}
+	}
+	
+	return push;
+}
+
 // Used to display event data, WIP
 function handleClick(event, data) {
+	console.log("eventid:" + data.event_id);
 	var xhttp;    
-	if (eventID == "") {
+	if (data.event_id == "") {
 		document.getElementById("eventDetail").innerHTML = "";
 		return;
 	}
@@ -101,7 +122,7 @@ function handleClick(event, data) {
 			document.getElementById("eventDetail").innerHTML = xhttp.responseText;
 		}
 	};
-	xhttp.open("GET", "detailevent.php?event="+eventID, true);
+	xhttp.open("GET", "detailevent.php?event="+data.event_id, true);
 	xhttp.send();
 	$('#eventDetailModal').modal('show');
 }
@@ -142,7 +163,7 @@ function performQuery() {
 	$.ajax({
 		method: "POST",
 		url: "php/calendarquery.php",
-		//data: {"date": _date.format("2016-05-08")},
+		//data: {"date": _date.format("201-05-08")},
 		data: {"date": _date.format("YYYY-MM-DD")},
 		success: function(data) {
 			if(data != null) {
@@ -150,11 +171,17 @@ function performQuery() {
 				divisions = reqData.length;
 				draw();
 			} else {
-				stage.clear();
+				cleanup();
 			}
 		},
 		dataType: "json"
 	});
+}
+
+function cleanup() {
+	stage.clear();
+	stage.removeAllChildren();
+	stage.removeAllEventListeners();
 }
 
 function drawTimeColumn() {

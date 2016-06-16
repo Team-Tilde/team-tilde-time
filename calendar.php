@@ -21,7 +21,7 @@
 		<script src="scripts/bootstrap.min.js" type="text/javascript"></script>
 		<script src="scripts/moment.js" type="text/javascript"></script>
 		<script src="scripts/calendar.js" type="text/javascript"></script>
-		<script src="https://code.createjs.com/easeljs-0.8.2.min.js" type="text/javascript"></script>
+		<script src="scripts/easeljs-0.8.2.min.js" type="text/javascript"></script>
 		<script src="scripts/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
 		
 		<div class="container">
