@@ -11,7 +11,7 @@
 	preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $_POST["date"], $date);
 	
 	if($date != null) {
-		$sql = "SELECT event_id, title, description, date_time_start, date_time_end FROM event WHERE date_time_start BETWEEN \"".$date[0]." 00:00:00\" AND \"".$date[0]." 23:59:59\"";
+		$sql = "SELECT event_id, title, description, date_time_start, date_time_end FROM event WHERE date_time_start BETWEEN \"".$date[0]." 00:00:00\" AND \"".$date[0]." 23:59:59\" ORDER BY date_time_start";
 		$result = $conn->query($sql);
 	} else {
 		echo "Nope";

@@ -95,7 +95,7 @@ function collideCheck(container) {
 	var push = 0;
 	
 	while(collideCheck) {
-		var hits = stage.getObjectsUnderPoint(container.x, container.y + push, 0);
+		var hits = stage.getObjectsUnderPoint(container.x + push + (divWidth / 2), container.y + 5, 0);
 		collideCheck = false;
 		for(var x = 0; x < hits.length; ++hits) {
 			if(hits[x].parent.name.includes("event") && hits[x].parent.name != container.name) {
@@ -169,6 +169,7 @@ function performQuery() {
 			if(data != null) {
 				reqData = data;
 				divisions = reqData.length;
+				cleanup();
 				draw();
 			} else {
 				cleanup();
