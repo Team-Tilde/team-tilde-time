@@ -37,13 +37,13 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Start Date/Time:</label>
 				<div class="col-sm-10">
-					<input id="taskStartDateText" type="text" class="form-control" placeholder="Start Date/Time">
+					<input id="taskStartDateText" type="text" class="form-control" placeholder="Start Date/Time" value="'; echo date("Y-m-d H:i:s"); echo '">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">End Date/Time:</label>
 				<div class="col-sm-10">
-				<input id="taskEndDateText" type="text" class="form-control" placeholder="End Date/Time">
+				<input id="taskEndDateText" type="text" class="form-control" placeholder="End Date/Time" value="'; echo date("Y-m-d H:i:s"); echo '">
 				</div>
 			</div>
 			<div class="form-group">
