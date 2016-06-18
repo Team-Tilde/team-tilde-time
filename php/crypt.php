@@ -25,13 +25,13 @@ function user_password_checking()
 		if ($txtUser === 'admin'  && password_verify($txtPwd, $hash))
 		{
 			login($txtUser);
-			header('Location: viewevents.php');
+			header('Location: calendar.php');
 			exit;
 		}
 		else if ($txtUser !== 'admin' && password_verify($txtPwd, $guestHash))
 		{
 			login($txtUser);
-			header('Location: viewevents.php');
+			header('Location: calendar.php');
 			exit;
 		}
 		else
