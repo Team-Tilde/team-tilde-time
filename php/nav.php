@@ -36,7 +36,6 @@ function echoActiveMenu($wordInUrl)
 				<li <?php echoActiveMenu("calendar");?> dropdown">
 					<a href="calendar.php" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Calendar <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li class="dropdown-header">Tasks</li>
 						<li <?php echoActiveClass("calendar");?> ><a href="calendar.php">Day Calendar</a></li>
 						<li <?php echoActiveClass("calendar-month");?> ><a href="calendar-month.php">Month Calendar</a></li>
 					</ul>
@@ -44,7 +43,6 @@ function echoActiveMenu($wordInUrl)
 				<li <?php echoActiveMenu("task");?> dropdown">
 					<a href="viewtasks.php" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tasks <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li class="dropdown-header">Tasks</li>
 						<li <?php echoActiveClass("viewtasks");?> ><a href="viewtasks.php">View Tasks</a></li>
 						<li><a href="#" onclick="showAddTaskModal()">Add Tasks</a></li>
 					</ul>
@@ -52,7 +50,6 @@ function echoActiveMenu($wordInUrl)
 				<li <?php echoActiveMenu("event")?> dropdown">
 					<a href="viewevents.php" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Events <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li class="dropdown-header">Events</li>
 						<li <?php echoActiveClass("viewevents");?> ><a href="viewevents.php">View Events</a></li>
 						<li><a href="#" onclick="showAddEventModal()">Add Event</a></li>
 					</ul>

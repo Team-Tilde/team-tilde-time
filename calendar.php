@@ -24,6 +24,8 @@
 		<script src="scripts/calendar.js" type="text/javascript"></script>
 		<script src="scripts/easeljs-0.8.2.min.js" type="text/javascript"></script>
 		<script src="scripts/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+		<script src="scripts/task.js"></script>
+		<script src="scripts/event.js"></script>
 		
 		<div class="container">
 			<?php
@@ -52,20 +54,7 @@
 			</div>
 		</div>
 		
-		<div id="eventDetailModal" class="modal fade" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Event Details</h4>
-					</div>
-					<div id="eventDetail" class="modal-body">
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					</div>
-				</div>
-			</div>
-		</div>
+		<?php require_once "php/modal.php";?>
+	
 	</body>
 </html>
