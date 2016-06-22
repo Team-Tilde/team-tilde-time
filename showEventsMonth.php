@@ -28,8 +28,8 @@
 					<tr>";
 		
 		while($row = $result->fetch_assoc()) {
-			$start_date = date_create($row['date_time_start']);
-			$end_date = date_create($row['date_time_end']);
+			$start_date = date_create($row['date_time_start'], timezone_open("Australia/Sydney"));
+			$end_date = date_create($row['date_time_end'], timezone_open("Australia/Sydney"));
 			
 			echo "<tr>
 					<td width='1%'><label><input class='checkSelect' type='checkbox' value='" . $row['event_id'] . "'></label></td>
