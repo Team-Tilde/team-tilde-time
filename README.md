@@ -21,9 +21,11 @@ This concludes the installation procedure. Enter <a href="http://localhost/team-
 
 If you are having trouble running the services, you may need to turn off any service using port 80 or 443. Skype is one application that may use these ports.
 
-If you don't want to turn off any service, you may need to press the Restore initial config button as UwAmp uses 443 for mysql by default. Doing this should make the port to 80.
+If you don't want to turn off any service, you may need to change your apache settings. To do this, click the Apache Config button on UwAmp. 
 
-If problem presist, you may need to change your apache settings. To do this, click the Apache Config button on UwAmp. Change the port number on main-serveur to something else like 8080.
+You may need to press the Restore initial config button as UwAmp uses 443 for mysql by default. Doing this should make the port to 80.
+
+If problem persist, change the port number on main-serveur to something else like 8080.
 
 Please do note that if you change the port. Be sure to enter the port number after localhost as followed:
 <a href="http://localhost:8080/team-tilde-time-master">http://localhost:8080/team-tilde-time-master</a>
