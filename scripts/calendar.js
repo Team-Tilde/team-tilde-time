@@ -31,6 +31,15 @@ $(document).ready(function(){
 	});
 });
 
+function dateSet(rewind) {
+	if(rewind) {
+		_date.subtract(1, 'day');
+	} else {
+		_date.add(1, 'day');
+	}
+	$('#dateval').text(_date.format(_format));
+	performQuery();
+}
 //-----------------------------------------------------
 
 var canvas;

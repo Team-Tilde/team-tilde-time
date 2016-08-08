@@ -21,6 +21,11 @@
 	color: #fff;
 }
 
+.dayleft, .dayright {
+	color: white;
+	padding-top: 30%;
+}
+
 #day_header > .col-md-1 {
 	padding-top: 10px;
 	color: #fff;
