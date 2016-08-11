@@ -20,12 +20,14 @@
 		if ($result->num_rows > 0) {
 			
 			while($row = $result->fetch_assoc()) {
-				echo "<p><label>Task Number: </label>" . $row['task_id'] . "</p>";
-				echo "<p><label>Task Category: </label>" . $row['tcdescription'] . "</p>";
-				echo "<p><label>Task Name: </label>" . $row['description'] . "</p>";
-				echo "<p><label>Task Start Date/Time: </label>" . $row['date_time_start'] . "</p>";
-				echo "<p><label>Task End Date/Time: </label>" . $row['date_time_end'] . "</p>";
-				echo "<p><label>Status: </label>" . $row['status'] . "</p>";
+				echo '<table><col width="200"><col width="400">';
+				echo "<tr><th>Number:</th><td>" . $row['task_id'] . "</td></tr>";
+				echo "<tr><th>Category:</th><td>" . $row['tcdescription'] . "</td></tr>";
+				echo "<tr><th>Name:</th><td>" . $row['description'] . "</td></tr>";
+				echo "<tr><th>Start Date/Time:</th><td>" . $row['date_time_start'] . "</td></tr>";
+				echo "<tr><th>End Date/Time:</th><td>" . $row['date_time_end'] . "</td></tr>";
+				echo "<tr><th>Status:</th><td>" . $row['status'] . "</td></tr>";
+				echo "</table>";
 			}
 		} else {
 			echo "No tasks found.";

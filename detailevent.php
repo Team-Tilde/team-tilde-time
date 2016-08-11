@@ -22,18 +22,22 @@
 		if ($result->num_rows > 0) {
 			
 			while($row = $result->fetch_assoc()) {
-				echo "<p><label>Task Title: </label>" . $row['tdescription'] . "</p>";
-				echo "<p><label>Task Category: </label>" . $row['tcdescription'] . "</p>";
-				echo "<p><label>Event ID: </label>" . $row['event_id'] . "</p>";
-				echo "<p><label>Event Title: </label>" . $row['title'] . "</p>";
-				echo "<p><label>Event Description: </label>" . $row['description'] . "</p>";
-				echo "<p><label>Event Location: </label>" . $row['location'] . "</p>";
-				echo "<p><label>Event Category: </label>" . $row['ecdescription'] . "</p>";
-				echo "<p><label>Event Start Date/Time: </label>" . $row['date_time_start'] . "</p>";
-				echo "<p><label>Event End Date/Time: </label>" . $row['date_time_end'] . "</p>";
-				echo "<p><label>Public: </label>" . ($row['public'] === '1' ? "Yes" : "No") . "</p>";
-				echo "<p><label>Private: </label>" . ($row['private'] === '1' ? "Yes" : "No") . "</p>";
-				echo "<p><label>Status: </label>" . $row['status'] . "</p>";
+				echo '<table><col width="200"><col width="400">';
+				echo "<tr><th>Task</th></tr>";
+				echo "<tr><th>Title:</th><td>" . $row['tdescription'] . "</td></tr>";
+				echo "<tr><th>Category:</th><td>" . $row['tcdescription'] . "</td></tr>";
+				echo "<tr><th>Events</th></tr>";
+				echo "<tr><th>ID:</th><td>" . $row['event_id'] . "</td></tr>";
+				echo "<tr><th>Title:</th><td>" . $row['title'] . "</td></tr>";
+				echo "<tr><th>Description:</th><td>" . $row['description'] . "</td></tr>";
+				echo "<tr><th>Location:</th><td>" . $row['location'] . "</td></tr>";
+				echo "<tr><th>Category:</th><td>" . $row['ecdescription'] . "</td></tr>";
+				echo "<tr><th>Start Date/Time:</th><td>" . $row['date_time_start'] . "</td></tr>";
+				echo "<tr><th>End Date/Time:</th><td>" . $row['date_time_end'] . "</td></tr>";
+				echo "<tr><th>Public:</th><td>" . ($row['public'] === '1' ? "Yes" : "No") . "</td></tr>";
+				echo "<tr><th>Private:</th><td>" . ($row['private'] === '1' ? "Yes" : "No") . "</td></tr>";
+				echo "<tr><th>Status:</th><td>" . $row['status'] . "</td></tr>";
+				echo "</table>";
 			}
 		} else {
 			echo "No events found.";
