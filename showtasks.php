@@ -47,7 +47,7 @@
 		echo "</table>";
 		
 	} else {
-		echo "No tasks found.";
+		echo "Not a single task found.";
 	}
 	
 	$conn->close();
