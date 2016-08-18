@@ -22,21 +22,18 @@
 		if ($result->num_rows > 0) {
 			
 			while($row = $result->fetch_assoc()) {
-				echo '<table><col width="200"><col width="400">';
-				echo "<tr><th>Task</th></tr>";
-				echo "<tr><th>Title:</th><td>" . $row['tdescription'] . "</td></tr>";
-				echo "<tr><th>Category:</th><td>" . $row['tcdescription'] . "</td></tr>";
-				echo "<tr><th>Events</th></tr>";
-				echo "<tr><th>ID:</th><td>" . $row['event_id'] . "</td></tr>";
+				echo '<table><col width="150"><col width="300"><col width="150"><col width="100">';
+				echo '<tr style="font-size:10px"><th>Task Title:</th><td>' . $row['tdescription'] . '</td><th>Task Category:</th><td>' . $row['tcdescription'] . '</td></tr>';
+				echo '<tr style="height:5px"><td colspan="3"><tr><td style="border-bottom: 1px solid #e5e5e5"></td><td style="border-bottom: 1px solid #e5e5e5"></td><td style="border-bottom: 1px solid #e5e5e5"></td><td style="border-bottom: 1px solid #e5e5e5"></td></tr><tr style="height:5px"><td colspan="3">';
+				echo "</tr><tr><th>ID:</th><td>" . $row['event_id'] . "</td></tr>";
 				echo "<tr><th>Title:</th><td>" . $row['title'] . "</td></tr>";
-				echo "<tr><th>Description:</th><td>" . $row['description'] . "</td></tr>";
+				echo '<tr style="height:5px"><td colspan="3"><tr><th>Description:</th><td>' . $row['description'] . '</td></tr><tr style="height:5px"><td colspan="3">';
 				echo "<tr><th>Location:</th><td>" . $row['location'] . "</td></tr>";
 				echo "<tr><th>Category:</th><td>" . $row['ecdescription'] . "</td></tr>";
 				echo "<tr><th>Start Date/Time:</th><td>" . $row['date_time_start'] . "</td></tr>";
 				echo "<tr><th>End Date/Time:</th><td>" . $row['date_time_end'] . "</td></tr>";
-				echo "<tr><th>Public:</th><td>" . ($row['public'] === '1' ? "Yes" : "No") . "</td></tr>";
-				echo "<tr><th>Private:</th><td>" . ($row['private'] === '1' ? "Yes" : "No") . "</td></tr>";
-				echo "<tr><th>Status:</th><td>" . $row['status'] . "</td></tr>";
+				echo "<tr><th>Public:</th><td>" . ($row['public'] === '1' ? "Yes" : "No") . "</td><th>Status:</th><td>" . $row['status'] . "</td></tr>";
+				//echo "<tr><th>Private:</th><td>" . ($row['private'] === '1' ? "Yes" : "No") . "</td></tr>";
 				echo "</table>";
 			}
 		} else {
