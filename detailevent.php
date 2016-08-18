@@ -33,7 +33,6 @@
 				echo "<tr><th>Start Date/Time:</th><td>" . $row['date_time_start'] . "</td></tr>";
 				echo "<tr><th>End Date/Time:</th><td>" . $row['date_time_end'] . "</td></tr>";
 				echo "<tr><th>Public:</th><td>" . ($row['public'] === '1' ? "Yes" : "No") . "</td><th>Status:</th><td>" . $row['status'] . "</td></tr>";
-				//echo "<tr><th>Private:</th><td>" . ($row['private'] === '1' ? "Yes" : "No") . "</td></tr>";
 				echo "</table>";
 			}
 		} else {
