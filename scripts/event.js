@@ -130,7 +130,6 @@ var json = JSON.stringify(
 		"taskeventstatusid": document.getElementById("eventStatusText").value,
 		"taskid": document.getElementById("eventTaskIDText").value,
 		"public": document.getElementById("eventPublicText").value,
-		"private": document.getElementById("eventPrivateText").value,
 		"eventnotes": notesArray
 	}
 });
@@ -207,7 +206,6 @@ function editEventData(eventID) {
 				+ "eventcategoryid=" + document.getElementById("eventCategoryText").value + "&"
 				+ "taskid=" + document.getElementById("eventTaskIDText").value + "&"
 				+ "public=" + document.getElementById("eventPublicText").value + "&"
-				+ "private=" + document.getElementById("eventPrivateText").value + "&"
 				+ "taskeventstatusid=" + document.getElementById("eventStatusText").value + "&"
 				+ "eventid=" + eventID;
   var xhttp;
