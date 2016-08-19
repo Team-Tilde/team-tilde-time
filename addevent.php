@@ -31,7 +31,7 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Location:</label>
 				<div class="col-sm-10">
-				<input id="eventLocationText" type="text" class="form-control" placeholder="Location">
+					<input id="eventLocationText" type="text" class="form-control" placeholder="Location">
 				</div>
 			</div>
 			<div class="form-group">
@@ -96,15 +96,6 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">Private</label>
-				<div class="col-sm-10">
-					<select id="eventPrivateText" class="form-control">
-						<option value="1" selected="selected">Yes</option>
-						<option value="0">No</option>
-					</select>
-				</div>
-			</div>
-			<div class="form-group">
 				<label class="col-sm-2 control-label">Event Status:</label>
 				<div class="col-sm-10">
 					<select id="eventStatusText" class="form-control">';
@@ -130,6 +121,26 @@
 					echo '</select>
 				</div>
 			</div>
+			
+			<h4 class="modal-title">Event Notes</h4>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Notes</label>
+				<div id="eventNotesDiv" class="col-sm-10">
+					<div>
+						<textarea class="form-control event-notes-text" rows="3" placeholder="Note 1"></textarea>
+						<div>
+							<input class="event-notes-checkbox" type="checkbox" value=""><label>Public</label>
+						</div>
+					</div>
+					
+				</div>
+				<div class="col-sm-offset-2 col-sm-10">
+					<a href="#" onclick="addEventNotes()">
+						<span class="glyphicon glyphicon-plus"></span><label>Add more notes</label>
+					</a>
+				</div>
+			</div>
+			
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 					<button class="btn btn-default" onclick="insertEventData()">Add event</button>

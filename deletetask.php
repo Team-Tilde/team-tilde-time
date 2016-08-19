@@ -12,8 +12,10 @@
 	{
 		$taskID = mysqli_real_escape_string($conn, $_GET['task']);
 
-		$sql1 = "DELETE FROM Event WHERE task_id=" . $taskID;
-		$sql2 = "DELETE FROM Task WHERE task_id=" . $taskID;
+		#Update the status to Deleted rather than removing it from the database.
+		#All events associated with the task will also change their status to Deleted.
+		$sql1 = "UPDATE Event SET task_event_status_id=4 WHERE task_id=" . $taskID;
+		$sql2 = "UPDATE Task SET task_event_status_id=4 WHERE task_id=" . $taskID;
 
 		//$sql1 = "UPDATE Event SET date_time_end = date_time_start WHERE task_id=" . $taskID; //might be what tharanga wants
 		//$sql2 = "UPDATE Task SET date_time_end = date_time_start WHERE task_id=" . $taskID;

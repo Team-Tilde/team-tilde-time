@@ -10,7 +10,7 @@
 	
 	$eventID = mysqli_real_escape_string($conn ,$_GET['event']);
 	
-	$sql = "SELECT e.event_category_id, e.title, e.description, e.location, e.public, e.private, e.date_time_start, e.date_time_end, e.task_id, e.task_event_status_id FROM Event as e
+	$sql = "SELECT e.event_category_id, e.title, e.description, e.location, e.public, e.date_time_start, e.date_time_end, e.task_id, e.task_event_status_id FROM Event as e
 			WHERE event_id = '" . $eventID . "'";
 	
 	$result = $conn->query($sql);
@@ -18,7 +18,6 @@
 	$description;
 	$location;
 	$public;
-	$private;
 	
 	if ($result->num_rows > 0) {
 			
@@ -30,7 +29,6 @@
 			$start_date = $row['date_time_start'];
 			$end_date = $row['date_time_end'];
 			$public = $row['public'];
-			$private = $row['private'];
 			$taskid = $row['task_id'];
 			$task_event_status_id = $row['task_event_status_id'];
 		}
@@ -128,23 +126,6 @@
 				<div class="col-sm-10">
 					<select id="eventPublicText" class="form-control">';
 						if ($public === '1')
-						{
-							echo '<option value="1" selected="selected">Yes</option>
-									<option value="0">No</option>';
-						}
-						else
-						{
-							echo '<option value="1">Yes</option>
-									<option value="0" selected="selected">No</option>';
-						}
-					echo '</select>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Private</label>
-				<div class="col-sm-10">
-					<select id="eventPrivateText" class="form-control">';
-						if ($private === '1')
 						{
 							echo '<option value="1" selected="selected">Yes</option>
 									<option value="0">No</option>';
