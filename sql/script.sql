@@ -34,8 +34,7 @@ CREATE TABLE IF NOT EXISTS `Event` (
 `event_category_id` INT(6) UNSIGNED,
 `title` VARCHAR(100) NOT NULL,
 `location` VARCHAR(100) NOT NULL,
-`public` char(1) NOT NULL,
-`private` char(1) NOT NULL,
+`public` BOOLEAN NOT NULL,
 `description` VARCHAR(500) NOT NULL,
 `date_time_start` DATETIME,
 `date_time_end` DATETIME,
@@ -43,6 +42,16 @@ CREATE TABLE IF NOT EXISTS `Event` (
 FOREIGN KEY (`task_id`) REFERENCES `Task`(`task_id`),
 FOREIGN KEY (`event_category_id`) REFERENCES `EventCategory`(`event_category_id`),
 FOREIGN KEY (`task_event_status_id`) REFERENCES `TaskEventStatus`(`task_event_status_id`)
+);
+
+CREATE TABLE IF NOT EXISTS `Event_Note` (
+`note_id` INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+`event_id` INT(6) UNSIGNED,
+`description` VARCHAR(150) NOT NULL,
+`public` BOOLEAN NOT NULL,
+`date_time_start` DATETIME,
+`date_time_end` DATETIME,
+FOREIGN KEY (`event_id`) REFERENCES `Event`(`event_id`)
 );
 
 INSERT IGNORE INTO `TaskEventStatus` (`task_event_status_id`, `status`) VALUES
