@@ -15,13 +15,12 @@
 	$eventcategoryid = mysqli_real_escape_string($conn, $_POST['eventcategoryid']);
 	$taskid = mysqli_real_escape_string($conn, $_POST['taskid']);
 	$public = mysqli_real_escape_string($conn, $_POST['public']);
-	$private = mysqli_real_escape_string($conn, $_POST['private']);
 	$eventid = mysqli_real_escape_string($conn, $_POST['eventid']);
 	$taskeventstatusid = mysqli_real_escape_string($conn, $_POST['taskeventstatusid']);
 	
 	$sql = "UPDATE Event SET task_id='" . $taskid . "', event_category_id='" . $eventcategoryid . 
 								"', title='" . $title . "', location='" . $location . 
-								"', public='" . $public . "', private='" . $private . 
+								"', public='" . $public . 
 								"', description='" . $description . "', date_time_start='" . $startdate . "', date_time_end='" . $enddate .
 								"', task_event_status_id='" . $taskeventstatusid . "' " .
 								"WHERE event_id ='" . $eventid . "'";
