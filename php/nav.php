@@ -36,8 +36,9 @@ function echoActiveMenu($wordInUrl)
 				<li <?php echoActiveMenu("calendar");?> dropdown">
 					<a href="calendar.php" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Calendar <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li <?php echoActiveClass("calendar");?> ><a href="calendar.php">Day Calendar</a></li>
-						<li <?php echoActiveClass("calendar-month");?> ><a href="calendar-month.php">Month Calendar</a></li>
+						<li <?php echoActiveClass("calendar");?> ><a href="calendar.php">Daily Calendar</a></li>
+						<li <?php echoActiveClass("calendar-week");?> ><a href="calendar-week.php">Weekly Calendar</a></li>
+						<li <?php echoActiveClass("calendar-month");?> ><a href="calendar-month.php">Monthly Calendar</a></li>
 					</ul>
 				</li>
 				<li <?php echoActiveMenu("task");?> dropdown">
