@@ -107,3 +107,7 @@ INSERT IGNORE INTO `event` (`event_id`, `task_id`, `event_category_id`, `title`,
 (19, 8, 3, 'Talk 3.1', 'TAFE', '0', 'Talk about how the implementation of the navigation for the project is going.', '2016-06-17 18:00:00', '2016-06-17 19:00:00', 1),
 (20, 8, 3, 'Talk 3.2', 'TAFE', '0', 'Talk about the implementation of the event functionalities.', '2016-06-18 18:00:00', '2016-06-18 18:30:00', 1),
 (21, 8, 3, 'Talk 3.3', 'TAFE', '0', 'Talk about how the implementation of the event functions are going.', '2016-06-19 22:00:00', '2016-06-19 22:15:00', 1);
+
+INSERT IGNORE INTO `Event_Note` (`note_id`, `event_id`, `description`, `public`, `date_time_start`, `date_time_end`) VALUES
+(1, 1, 'Event Note Test 1', '0', '2016-05-08 00:00:00', '2016-05-08 05:00:00'),
+(2, 1, 'Event Note Test 2', '1', '2016-05-09 05:00:00', '2016-05-09 05:00:00');
