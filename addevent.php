@@ -13,13 +13,18 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Start Date/Time:</label>
 				<div class="col-sm-10">
-					<input id="eventStartDateText" type="text" class="form-control" placeholder="Start Date/Time" value="'; echo date("Y-m-d H:i:s"); echo '">
+					<input id="eventStartDateText" type="text" class="form-control" placeholder="Start Date/Time" onblur="checkTimeConflict()" value="'; echo date("Y-m-d H:i:s"); echo '">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">End Date/Time:</label>
 				<div class="col-sm-10">
-				<input id="eventEndDateText" type="text" class="form-control" placeholder="End Date/Time" value="'; echo date("Y-m-d H:i:s"); echo '">
+				<input id="eventEndDateText" type="text" class="form-control" placeholder="End Date/Time" onblur="checkTimeConflict()" value="'; echo date("Y-m-d H:i:s"); echo '">
+				</div>
+			</div>
+			<div class="form-group hidden" id="collideSection">
+				<label class="col-sm-2 control-label">Colliding Events:</label>
+				<label class="col-sm-10" id="eventCollideOut"></label>
 				</div>
 			</div>
 			<div class="form-group">

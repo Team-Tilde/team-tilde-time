@@ -338,3 +338,44 @@ function checkAll() {
 			}
 		}
 }
+
+function checkTimeConflict() {
+	var collideSection = document.getElementById("collideSection");
+	var collideOut = document.getElementById("eventCollideOut");
+	var timeStart = document.getElementById("eventStartDateText");
+	var timeEnd = document.getElementById("eventEndDateText");
+	var queryData;
+	
+	$.ajax({
+		method: "POST",
+		url: "php/calendarquery.php",
+		data: {"timeStart": timeStart.value, "timeEnd": timeEnd.value},
+		success: function(data) {
+			if(data != null) {
+				queryData = data;
+			} 
+		},
+		error: function(object, status, errorThrow) {
+			console.log(status + " " + errorThrow);
+		},
+		complete: function(jqXHR, textStatus) {
+			collideSection.className = "form-group hidden";
+			collideOut.innerHTML = "";
+			
+			if(queryData != null) {
+				collideSection.className = "form-group";
+				var out;
+				out = "<p>The following events were found to collide with your schedule:</p>\n";
+				for(var i = 0; i < queryData.length; ++i) {
+					out += "<p>ID: " + queryData[i].event_id;
+					out += " Title: " + queryData[i].title;
+					out += "<br>\n Description: " + queryData[i].description;
+					out += "<br>\n Start Date: " + queryData[i].date_time_start;
+					out += "<br>\n End Date: " + queryData[i].date_time_end + "</p>\n";
+				}
+				collideOut.innerHTML += out;
+			}
+		},
+		dataType: "json"
+	});
+}
