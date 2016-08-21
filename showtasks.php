@@ -13,7 +13,7 @@
 			WHERE t.date_time_end > t.date_time_start"; //might be what tharanga wants
 	$result = $conn->query($sql);
 
-	if ($result->num_rows > 0) {
+	if (!empty($result) && $result->num_rows > 0) {
 		
 		echo "<table id='tableTasks' class='table table-hover'>
 					<tr>
