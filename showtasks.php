@@ -11,7 +11,6 @@
 			JOIN TaskCategory as tc ON t.task_category_id = tc.task_category_id
 			JOIN TaskEventStatus as tes ON t.task_event_status_id = tes.task_event_status_id
 			WHERE t.date_time_end > t.date_time_start"; //might be what tharanga wants
-			echo $sql;
 	$result = $conn->query($sql);
 
 	if (!empty($result) && $result->num_rows > 0) {
