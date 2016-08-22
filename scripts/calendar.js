@@ -184,6 +184,9 @@ function performQuery() {
 				cleanup();
 			}
 		},
+		error: function() {
+			cleanup();
+		},
 		dataType: "json"
 	});
 }
