@@ -139,7 +139,9 @@ REPLACE INTO `task` (`task_id`, `description`, `task_category_id`, `date_time_st
 (5, 'ITECH1000 Assignment 2', 1, '2016-06-08 00:00:00', '2016-06-10 00:00:00', 1, 1),
 (6, 'Meeting 1', 2, '2016-08-08 00:00:00', '2016-08-10 00:00:00', 1, 1),
 (7, 'Meeting 2', 2, '2016-09-08 00:00:00', '2016-09-10 00:00:00', 1, 1),
-(8, 'Meeting 3', 2, '2016-10-08 00:00:00', '2016-10-10 00:00:00', 1, 1);
+(8, 'Meeting 3', 2, '2016-10-08 00:00:00', '2016-10-10 00:00:00', 1, 1),
+(9, 'ITECH3209 Sprint 3', 1, '2016-07-01 00:00:00', '2016-09-20 00:00:00', 1, 1);
+
 
 REPLACE INTO `eventcategory` (`event_category_id`, `description`) VALUES
 (1, 'Study'),
@@ -170,12 +172,28 @@ REPLACE INTO `event` (`event_id`, `task_id`, `event_category_id`, `title`, `loca
 (18, 7, 3, 'Talk 2.3', 'TAFE', '0', 'Talk about who is responsible for what roles.', '2016-06-16 18:00:00', '2016-06-16 19:00:00', 1),
 (19, 8, 3, 'Talk 3.1', 'TAFE', '0', 'Talk about how the implementation of the navigation for the project is going.', '2016-06-17 18:00:00', '2016-06-17 19:00:00', 1),
 (20, 8, 3, 'Talk 3.2', 'TAFE', '0', 'Talk about the implementation of the event functionalities.', '2016-06-18 18:00:00', '2016-06-18 18:30:00', 1),
-(21, 8, 3, 'Talk 3.3', 'TAFE', '0', 'Talk about how the implementation of the event functions are going.', '2016-06-19 22:00:00', '2016-06-19 22:15:00', 1);
+(21, 8, 3, 'Talk 3.3', 'TAFE', '0', 'Talk about how the implementation of the event functions are going.', '2016-06-19 22:00:00', '2016-06-19 22:15:00', 1),
+(22, 9, 4, 'Plan', 'TAFE', '0', 'Document what to do for the sprint.', '2016-07-01 22:00:00', '2016-07-01 22:15:00', 1),
+(23, 9, 3, 'Meeting 1', 'TAFE', '0', 'Meeting on Skype for product backlog items.', '2016-07-15 11:00:00', '2016-07-15 11:15:00', 1),
+(24, 9, 3, 'Meeting 2', 'TAFE', '0', 'Meeting on Skype for suggestions on Sprint Document.', '2016-07-29 15:00:00', '2016-07-29 15:15:00', 1),
+(25, 9, 3, 'Meeting 3', 'TAFE', '0', 'Meeting on Skype for demo for what we have done so far.', '2016-08-27 09:00:00', '2016-08-27 22:00:00', 1),
+(26, 9, 1, 'Testing 1', 'TAFE', '0', 'Test what we have done.', '2016-08-28 09:00:00', '2016-08-28 10:00:00', 1),
+(27, 9, 3, 'Meeting 4', 'TAFE', '0', 'Meeting on Skype for Presentation slides.', '2016-08-29 09:00:00', '2016-08-29 10:00:00', 1),
+(28, 9, 1, 'Testing 2', 'TAFE', '0', 'Test the event notes, weekly calendar, event conflicts.', '2016-08-29 10:00:00', '2016-08-29 11:00:00', 1),
+(29, 9, 3, 'Meeting 5', 'TAFE', '0', 'Skype meeting for what we gonna  do for presentation.', '2016-08-30 09:00:00', '2016-08-30 11:00:00', 1),
+(30, 9, 3, 'Meeting 6', 'TAFE', '0', 'Skype meeting for who will do what part for presentation.', '2016-08-31 09:00:00', '2016-08-31 15:00:00', 1),
+(31, 9, 1, 'Testing 3', 'TAFE', '0', 'Test the task notes.', '2016-09-01 09:00:00', '2016-09-01 18:00:00', 1);
 
 REPLACE INTO `Event_Note` (`note_id`, `event_id`, `description`, `public`, `date_time_start`, `date_time_end`) VALUES
 (1, 1, 'Event Note Test 1', '0', '2016-05-08 00:00:00', '2016-05-08 05:00:00'),
-(2, 1, 'Event Note Test 2', '1', '2016-05-09 05:00:00', '2016-05-09 05:00:00');
+(2, 1, 'Event Note Test 2', '1', '2016-05-09 05:00:00', '2016-05-09 05:00:00'),
+(3, 30, 'Anthony (events notes)', '0', '2016-08-31 09:00:00', '2016-08-31 15:00:00'),
+(4, 30, 'Clifford (tasks/design)', '0', '2016-08-31 09:00:00', '2016-08-31 15:00:00'),
+(5, 30, 'Russell (weekly calendar)', '0', '2016-08-31 09:00:00', '2016-08-31 15:00:00'),
+(6, 30, 'Patricio (event conflicts)', '0', '2016-08-31 09:00:00', '2016-08-31 15:00:00'),
+(7, 30, 'Tharanga (documentation/testing)', '0', '2016-08-31 09:00:00', '2016-08-31 15:00:00');
 
 REPLACE INTO `Task_Note` (`note_id`, `task_id`, `description`, `public`, `date_time_start`, `date_time_end`) VALUES
 (1, 1, 'Task Note Test 1', '0', '2016-05-08 00:00:00', '2016-05-08 05:00:00'),
-(2, 1, 'Task Note Test 2', '1', '2016-05-09 05:00:00', '2016-05-09 05:00:00');
+(2, 1, 'Task Note Test 2', '1', '2016-05-09 05:00:00', '2016-05-09 05:00:00'),
+(3, 9, 'Iteration 3 and Presentation', '0', '2016-07-01 00:00:00', '2016-09-20 00:00:00');
