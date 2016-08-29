@@ -7,19 +7,19 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Event Title:</label>
 				<div class="col-sm-10">
-					<input id="eventTitleText" type="text" class="form-control" placeholder="Event Title">
+					<input id="addEventTitleText" type="text" class="form-control" placeholder="Event Title">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Start Date/Time:</label>
 				<div class="col-sm-10">
-					<input id="eventStartDateText" type="text" class="form-control" placeholder="Start Date/Time" onblur="checkTimeConflict()" value="'; echo date("Y-m-d H:i:s"); echo '">
+					<input id="addEventStartDateText" type="text" class="form-control" placeholder="Start Date/Time" onblur="checkTimeConflict()" value="'; echo date("Y-m-d H:i:s"); echo '">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">End Date/Time:</label>
 				<div class="col-sm-10">
-				<input id="eventEndDateText" type="text" class="form-control" placeholder="End Date/Time" onblur="checkTimeConflict()" value="'; echo date("Y-m-d H:i:s"); echo '">
+				<input id="addEventEndDateText" type="text" class="form-control" placeholder="End Date/Time" onblur="checkTimeConflict()" value="'; echo date("Y-m-d H:i:s"); echo '">
 				</div>
 			</div>
 			<div class="form-group hidden" id="collideSection">
@@ -30,19 +30,19 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Description:</label>
 				<div class="col-sm-10">
-				<textarea id="eventDescriptionText" class="form-control" rows="5" placeholder="Description"></textarea>
+				<textarea id="addEventDescriptionText" class="form-control" rows="5" placeholder="Description"></textarea>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Location:</label>
 				<div class="col-sm-10">
-					<input id="eventLocationText" type="text" class="form-control" placeholder="Location">
+					<input id="addEventLocationText" type="text" class="form-control" placeholder="Location">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Event Category:</label>
 				<div class="col-sm-10">
-					<select id="eventCategoryText" class="form-control">';
+					<select id="addEventCategoryText" class="form-control">';
 						 
 						$conn = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
 						
@@ -68,7 +68,7 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Assign Tasks To:</label>
 				<div class="col-sm-10">
-					<select id="eventTaskIDText" class="form-control">';
+					<select id="addEventTaskIDText" class="form-control">';
 						 
 						$conn = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
 						
@@ -94,7 +94,7 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Public</label>
 				<div class="col-sm-10">
-					<select id="eventPublicText" class="form-control">
+					<select id="addEventPublicText" class="form-control">
 						<option value="1">Yes</option>
 						<option value="0" selected="selected">No</option>
 					</select>
@@ -103,7 +103,7 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Event Status:</label>
 				<div class="col-sm-10">
-					<select id="eventStatusText" class="form-control">';
+					<select id="addEventStatusText" class="form-control">';
 						 
 						$conn = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
 						
@@ -130,7 +130,7 @@
 			<h4 class="modal-title">Event Notes</h4>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Notes</label>
-				<div id="eventNotesDiv" class="col-sm-10">
+				<div id="addEventNotesDiv" class="col-sm-10">
 					<div>
 						<textarea class="form-control event-notes-text" rows="3" placeholder="Note 1"></textarea>
 						<div>

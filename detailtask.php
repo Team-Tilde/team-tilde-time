@@ -33,6 +33,30 @@
 			echo "No tasks found.";
 		}
 		
+		$sql = "SELECT description, date_time_start, date_time_end FROM Task_Note WHERE task_id = '" . $taskID . "'
+				ORDER BY date_time_start";
+		$result = $conn->query($sql);
+		
+		if ($result->num_rows > 0) {
+			echo '<hr/><h4>Task Notes</h4><hr/>';
+			$counter = 1;
+			while($row = $result->fetch_assoc()) {
+				
+				$start_date = date_create($row['date_time_start'], timezone_open("Australia/Sydney"));
+				$end_date = date_create($row['date_time_end'], timezone_open("Australia/Sydney"));
+				
+				echo '<table><col width="100">';
+				echo "<tr><th colspan='2'> Note " . $counter . "</th></tr>";
+				echo "<tr><th>Description:</th><td>" . $row['description'] . "</td></tr>";
+				echo "<tr><th>Start date:</th><td>" . date_format($start_date, 'l jS F Y h:i a') . "</td></tr>";
+				echo "<tr><th>End Date:</th><td>" . date_format($end_date, 'l jS F Y h:i a') . "</td></tr>";
+				echo "</table><br/>";
+				//echo "<p><label>Public/Private: </label>" . $row['public/private'] . "</p>";
+				$counter++;
+			}
+			
+		}
+		
 		$conn->close();
 	}
 ?>

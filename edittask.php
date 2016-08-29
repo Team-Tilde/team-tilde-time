@@ -38,7 +38,7 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Task Type:</label>
 				<div class="col-sm-10">
-					<select id="taskCategoryText" class="form-control">';
+					<select id="editTaskCategoryText" class="form-control">';
 						
 						$sql = "SELECT task_category_id, description FROM TaskCategory";
 						$result = $conn->query($sql);
@@ -65,25 +65,25 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Description:</label>
 				<div class="col-sm-10">
-				<textarea id="taskDescriptionText" class="form-control" rows="5">' . $description . '</textarea>
+				<textarea id="editTaskDescriptionText" class="form-control" rows="5">' . $description . '</textarea>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Start Date/Time:</label>
 				<div class="col-sm-10">
-					<input id="taskStartDateText" type="text" class="form-control" value="' . $start_date . '">
+					<input id="editTaskStartDateText" type="text" class="form-control" value="' . $start_date . '">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">End Date/Time:</label>
 				<div class="col-sm-10">
-				<input id="taskEndDateText" type="text" class="form-control" value="' . $end_date . '">
+				<input id="editTaskEndDateText" type="text" class="form-control" value="' . $end_date . '">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Task Status:</label>
 				<div class="col-sm-10">
-					<select id="eventStatusText" class="form-control">';
+					<select id="editTaskStatusText" class="form-control">';
 						
 						$sql = "SELECT task_event_status_id, status FROM TaskEventStatus";
 						$result = $conn->query($sql);
@@ -106,8 +106,46 @@
 					
 					echo '</select>
 				</div>
-			</div>
-			<div class="form-group">
+			</div>';
+			
+			echo '<div class="form-group">
+				<label class="col-sm-2 control-label">Notes</label>
+				<div class="col-sm-10">
+					<div>';
+					
+					$sql = "SELECT description, date_time_start, date_time_end, public FROM Task_Note WHERE task_id = '" . $taskID . "'
+							ORDER BY date_time_start";
+					$result = $conn->query($sql);
+					
+					if ($result->num_rows > 0) {
+						echo '<div>';
+						while($row = $result->fetch_assoc()) {
+							echo '<textarea class="form-control task-notes-text" row="3" placeholder="New Note" readonly>' . $row['description'] . "</textarea>";
+							echo '<div>';
+							
+								if($row['public'] === '1') {
+									echo '<input class="task-notes-checkbox" type="checkbox" value="" checked disabled><label>Public</label>';
+								}
+								else {
+									echo '<input class="task-notes-checkbox" type="checkbox" value="" disabled><label>Public</label>';
+								}
+								
+							echo '</div>';
+						}
+						echo '</div>';
+					}
+						echo '<div id="editTaskNotesDiv">
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-offset-2 col-sm-10">
+					<a href="#" onclick="addEditTaskNotes()">
+						<span class="glyphicon glyphicon-plus"></span><label>Add more notes</label>
+					</a>
+				</div>
+			</div>';
+			
+			echo '<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 					<button class="btn btn-default" onclick="editTaskData('; echo $taskID . ')">Edit task</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
