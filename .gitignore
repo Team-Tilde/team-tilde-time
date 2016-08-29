@@ -4,3 +4,4 @@
 \properties
 *.config
 *.cspr*
+.htaccess

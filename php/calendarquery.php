@@ -2,10 +2,10 @@
 	header('Content-type: application/json; charset=utf-8');
 	require_once "conf.php";
 
-	$conn = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
+	$conn = new PDO("mysql:host=$DB_HOST;dbname=$DB_NAME", $DB_USER, $DB_PASSWORD);
 
-	if ($conn->connect_error) {
-		die("Connection failed: " . $conn->connect_error);
+	if (!$conn) {
+		die("Connection failed");
 	}
 
 	if(array_key_exists('date', $_POST)) {
@@ -23,17 +23,16 @@
 		$sql = "SELECT event_id, title, description, date_time_start, date_time_end FROM event WHERE date_time_start BETWEEN \"".$date[0]." 00:00:00\" AND \"".$date[0]." 23:59:59\" ORDER BY date_time_start";
 		$result = $conn->query($sql);
 	} else if(isset($startT) && isset($endT)) {
-		// Unsure of query validity, consider date_time_end?
-		$sql = "SELECT event_id, title, description, date_time_start, date_time_end FROM event WHERE date_time_start BETWEEN \"".$startT."\" AND \"".$endT."\" ORDER BY date_time_start";
+		$sql = "SELECT event_id, title, description, date_time_start, date_time_end FROM event WHERE date_time_start BETWEEN '$startT' AND '$endT' UNION SELECT event_id, title, description, date_time_start, date_time_end FROM event WHERE date_time_end BETWEEN '$startT' AND '$endT' UNION SELECT event_id, title, description, date_time_start, date_time_end FROM event WHERE '$startT' <= date_time_start AND '$endT' >= date_time_end";
 		$result = $conn->query($sql);
 	} else {
 		die("Query failed, variables not initialized");
 	}
 
 	if(isset($result)) { 
-		if($result->num_rows > 0) {
+		if($result->rowCount() > 0) {
 			$data = array();
-			while($row = $result->fetch_assoc()) {
+			foreach($result as $key => $row) {
 				array_push($data, array(
 					"event_id"			=> $row['event_id'],
 					"title" 			=> $row['title'],
@@ -50,5 +49,5 @@
 	} else {
 		die("Query failed, results not initialized");
 	}
-	$conn->close();
+	//$conn->close();
 ?>
