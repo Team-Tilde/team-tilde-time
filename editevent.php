@@ -38,39 +38,39 @@
 
 	echo '<form id="editEventForm" class="form-horizontal">
 			<div class="form-group">
-				<label class="col-sm-2 control-label">Event Title:</label>
+				<label class="col-sm-2 control-label">Title:</label>
 				<div class="col-sm-10">
-					<input id="eventTitleText" type="text" class="form-control" value="' . $title . '">
+					<input id="editEventTitleText" type="text" class="form-control" value="' . $title . '">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Start Date/Time:</label>
 				<div class="col-sm-10">
-					<input id="eventStartDateText" type="text" class="form-control" value="' . $start_date . '">
+					<input id="editEventStartDateText" type="text" class="form-control" value="' . $start_date . '">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">End Date/Time:</label>
 				<div class="col-sm-10">
-				<input id="eventEndDateText" type="text" class="form-control" value="' . $end_date . '">
+				<input id="editEventEndDateText" type="text" class="form-control" value="' . $end_date . '">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Description:</label>
 				<div class="col-sm-10">
-				<textarea id="eventDescriptionText" class="form-control" rows="5">' . $description . '</textarea>
+				<textarea id="editEventDescriptionText" class="form-control" rows="5">' . $description . '</textarea>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Location:</label>
 				<div class="col-sm-10">
-				<input id="eventLocationText" type="text" class="form-control" value="' . $location . '">
+				<input id="editEventLocationText" type="text" class="form-control" value="' . $location . '">
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">Event Category:</label>
+				<label class="col-sm-2 control-label">Category:</label>
 				<div class="col-sm-10">
-					<select id="eventCategoryText" class="form-control">';
+					<select id="editEventCategoryText" class="form-control">';
 						
 						$sql = "SELECT event_category_id, description FROM EventCategory";
 						$result = $conn->query($sql);
@@ -95,9 +95,9 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">Assign Tasks To:</label>
+				<label class="col-sm-2 control-label">Assign To:</label>
 				<div class="col-sm-10">
-					<select id="eventTaskIDText" class="form-control">';
+					<select id="editEventTaskIDText" class="form-control">';
 						
 						$sql = "SELECT task_id, description FROM Task";
 						$result = $conn->query($sql);
@@ -124,7 +124,7 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Public</label>
 				<div class="col-sm-10">
-					<select id="eventPublicText" class="form-control">';
+					<select id="editEventPublicText" class="form-control">';
 						if ($public === '1')
 						{
 							echo '<option value="1" selected="selected">Yes</option>
@@ -139,9 +139,9 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">Event Status:</label>
+				<label class="col-sm-2 control-label">Status:</label>
 				<div class="col-sm-10">
-					<select id="eventStatusText" class="form-control">';
+					<select id="editEventStatusText" class="form-control">';
 						
 						$sql = "SELECT task_event_status_id, status FROM TaskEventStatus";
 						$result = $conn->query($sql);
@@ -164,13 +164,52 @@
 					
 					echo '</select>
 				</div>
-			</div>
-			<div class="form-group">
+			</div>';
+			
+			echo '<div class="form-group">
+				<label class="col-sm-2 control-label">Notes</label>
+				<div class="col-sm-10">
+					<div>';
+					
+					$sql = "SELECT description, date_time_start, date_time_end, public FROM Event_Note WHERE event_id = '" . $eventID . "'
+							ORDER BY date_time_start";
+					$result = $conn->query($sql);
+					
+					if ($result->num_rows > 0) {
+						echo '<div>';
+						while($row = $result->fetch_assoc()) {
+							echo '<textarea class="form-control event-notes-text" row="3" placeholder="New Note" readonly>' . $row['description'] . "</textarea>";
+							echo '<div>';
+							
+								if($row['public'] === '1') {
+									echo '<input class="event-notes-checkbox" type="checkbox" value="" checked disabled><label>Public</label>';
+								}
+								else {
+									echo '<input class="event-notes-checkbox" type="checkbox" value="" disabled><label>Public</label>';
+								}
+								
+							echo '</div>';
+						}
+						echo '</div>';
+					}
+						echo '<div id="editEventNotesDiv">
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-offset-2 col-sm-10">
+					<a href="#" onclick="addEditEventNotes()">
+						<span class="glyphicon glyphicon-plus"></span><label>Add more notes</label>
+					</a>
+				</div>
+			</div>';
+			
+			echo '<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 					<button class="btn btn-default" onclick="editEventData('; echo $eventID . ')">Edit event</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</form>';
+		
 		$conn->close();
 ?>

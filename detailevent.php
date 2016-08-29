@@ -34,6 +34,7 @@
 				echo "<tr><th>End Date/Time:</th><td>" . $row['date_time_end'] . "</td></tr>";
 				echo "<tr><th>Public:</th><td>" . ($row['public'] === '1' ? "Yes" : "No") . "</td><th>Status:</th><td>" . $row['status'] . "</td></tr>";
 			}
+			echo "</table>";
 		} else {
 			echo "No events found.";
 		}
@@ -43,20 +44,24 @@
 		$result = $conn->query($sql);
 		
 		if ($result->num_rows > 0) {
-			echo "<tr><th>Event Notes</th></tr>";
+			echo '<hr/><h4>Event Notes</h4><hr/>';
+			$counter = 1;
 			while($row = $result->fetch_assoc()) {
 				
 				$start_date = date_create($row['date_time_start'], timezone_open("Australia/Sydney"));
 				$end_date = date_create($row['date_time_end'], timezone_open("Australia/Sydney"));
 				
-				echo "<tr><th>" . $row['description'] . "</th></tr>";
-				echo "<tr><th>Start date:</th><td>" . date_format($start_date, 'l jS F Y h:i a') . "</td><th>End Date:</th><td>" . date_format($end_date, 'l jS F Y h:i a') . "</td></tr>";
+				echo '<table><col width="100">';
+				echo "<tr><th colspan='2'> Note " . $counter . "</th></tr>";
+				echo "<tr><th>Description:</th><td>" . $row['description'] . "</td></tr>";
+				echo "<tr><th>Start date:</th><td>" . date_format($start_date, 'l jS F Y h:i a') . "</td></tr>";
+				echo "<tr><th>End Date:</th><td>" . date_format($end_date, 'l jS F Y h:i a') . "</td></tr>";
+				echo "</table><br/>";
 				//echo "<p><label>Public/Private: </label>" . $row['public/private'] . "</p>";
+				$counter++;
 			}
 			
 		}
-		
-		echo "</table>";
 		
 		$conn->close();
 	}
