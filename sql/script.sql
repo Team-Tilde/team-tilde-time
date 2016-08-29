@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS `Institute` (
 `institute_id` INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 `description` VARCHAR(200) NOT NULL,
 `address` VARCHAR(200) NOT NULL,
-`contact` VARCHAR(30) NOT NULL 
+`contact` VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `Semester` (
@@ -60,6 +60,16 @@ CREATE TABLE IF NOT EXISTS `Task` (
 FOREIGN KEY (`task_category_id`) REFERENCES `TaskCategory`(`task_category_id`),
 FOREIGN KEY (`task_event_status_id`) REFERENCES `TaskEventStatus`(`task_event_status_id`),
 FOREIGN KEY (`cont_code`) REFERENCES `Contact`(`cont_code`)
+);
+
+CREATE TABLE IF NOT EXISTS `Task_Note` (
+`note_id` INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+`task_id` INT(6) UNSIGNED,
+`description` VARCHAR(150) NOT NULL,
+`public` BOOLEAN NOT NULL,
+`date_time_start` DATETIME,
+`date_time_end` DATETIME,
+FOREIGN KEY (`task_id`) REFERENCES `Task`(`task_id`)
 );
 
 CREATE TABLE IF NOT EXISTS `EventCategory` (
@@ -165,3 +175,7 @@ REPLACE INTO `event` (`event_id`, `task_id`, `event_category_id`, `title`, `loca
 REPLACE INTO `Event_Note` (`note_id`, `event_id`, `description`, `public`, `date_time_start`, `date_time_end`) VALUES
 (1, 1, 'Event Note Test 1', '0', '2016-05-08 00:00:00', '2016-05-08 05:00:00'),
 (2, 1, 'Event Note Test 2', '1', '2016-05-09 05:00:00', '2016-05-09 05:00:00');
+
+REPLACE INTO `Task_Note` (`note_id`, `task_id`, `description`, `public`, `date_time_start`, `date_time_end`) VALUES
+(1, 1, 'Task Note Test 1', '0', '2016-05-08 00:00:00', '2016-05-08 05:00:00'),
+(2, 1, 'Task Note Test 2', '1', '2016-05-09 05:00:00', '2016-05-09 05:00:00');
