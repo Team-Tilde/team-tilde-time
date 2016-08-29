@@ -485,8 +485,8 @@ function checkAll() {
 function checkTimeConflict() {
 	var collideSection = document.getElementById("collideSection");
 	var collideOut = document.getElementById("eventCollideOut");
-	var timeStart = document.getElementById("eventStartDateText");
-	var timeEnd = document.getElementById("eventEndDateText");
+	var timeStart = document.getElementById("addEventStartDateText");
+	var timeEnd = document.getElementById("addEventEndDateText");
 	var queryData;
 	
 	$.ajax({
