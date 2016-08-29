@@ -93,7 +93,7 @@ xhttp.send(param);
 */
 
 ///Creates a reference to eventNotesDiv
-var eventNotesDiv = document.getElementById("eventNotesDiv");
+var eventNotesDiv = document.getElementById("addEventNotesDiv");
 
 ///Get all event notes textareas to put it in an array.
 var eventnotes = eventNotesDiv.querySelectorAll(".event-notes-text");
@@ -125,15 +125,15 @@ for (i = 0; i < eventnotes.length; i++)
 var json = JSON.stringify(
 {"data": 
 	{
-		"title": document.getElementById("eventTitleText").value,
-		"startdate": document.getElementById("eventStartDateText").value,
-		"enddate": document.getElementById("eventEndDateText").value,
-		"description": document.getElementById("eventDescriptionText").value,
-		"location": document.getElementById("eventLocationText").value,
-		"eventcategoryid": document.getElementById("eventCategoryText").value,
-		"taskeventstatusid": document.getElementById("eventStatusText").value,
-		"taskid": document.getElementById("eventTaskIDText").value,
-		"public": document.getElementById("eventPublicText").value,
+		"title": document.getElementById("addEventTitleText").value,
+		"startdate": document.getElementById("addEventStartDateText").value,
+		"enddate": document.getElementById("addEventEndDateText").value,
+		"description": document.getElementById("addEventDescriptionText").value,
+		"location": document.getElementById("addEventLocationText").value,
+		"eventcategoryid": document.getElementById("addEventCategoryText").value,
+		"taskeventstatusid": document.getElementById("addEventStatusText").value,
+		"taskid": document.getElementById("addEventTaskIDText").value,
+		"public": document.getElementById("addEventPublicText").value,
 		"eventnotes": notesArray
 	}
 });
@@ -198,10 +198,7 @@ function showEditEventModal(eventID) {
 }
 
 function editEventData(eventID) {
-	if (eventID == "") {
-	document.getElementById("editEventModalPlaceholder").innerHTML = "";
-	return;
-  }
+
   /*
   var param = "title=" + document.getElementById("eventTitleText").value + "&"
 				+ "startdate=" + document.getElementById("eventStartDateText").value + "&"
@@ -375,7 +372,7 @@ function addEventNotes() {
 	noteCounter++;
 	
 	///Creates a reference to the div containing the event notes.
-	var eventNotesDiv = document.getElementById("eventNotesDiv");
+	var eventNotesDiv = document.getElementById("addEventNotesDiv");
 	
 	///Create a div to contain all the elements.
 	var div = document.createElement("div");
