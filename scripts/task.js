@@ -458,3 +458,19 @@ function checkAll() {
 			}
 		}
 }
+
+function showTasksByFilter(taskCatID) {
+  var xhttp;    
+  if (taskCatID == "") {
+	document.getElementById("taskData").innerHTML = "";
+	return;
+  }
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+	if (xhttp.readyState == 4 && xhttp.status == 200) {
+	  document.getElementById("taskData").innerHTML = xhttp.responseText;
+	}
+  };
+  xhttp.open("GET", "showtasks.php?taskCatID="+taskCatID, true);
+  xhttp.send();
+}
