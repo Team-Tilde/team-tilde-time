@@ -1,0 +1,19 @@
+.statusPending
+{
+	color:orange;
+}
+
+.statusStart
+{
+	color:blue;
+}
+
+.statusComplete
+{
+	color:green;
+}
+
+.statusDelete
+{
+	color:red;
+}
