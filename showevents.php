@@ -18,7 +18,7 @@
 	$sql = "SELECT e.event_id, ec.description as ecdescription, e.title, e.description, e.location, e.date_time_start, e.date_time_end, tes.status FROM Event as e
 			JOIN eventcategory as ec ON e.event_category_id = ec.event_category_id
 			JOIN TaskEventStatus as tes ON e.task_event_status_id = tes.task_event_status_id
-			WHERE e.task_id = '" . $selected . "'" . "AND e.task_event_status_id != 4";
+			WHERE e.task_id = '" . $selected . "'";
 	$result = $conn->query($sql);
 
 	if ($result->num_rows > 0) {
@@ -41,7 +41,21 @@
 			$start_date = date_create($row['date_time_start'], timezone_open("Australia/Sydney"));
 			$end_date = date_create($row['date_time_end'], timezone_open("Australia/Sydney"));
 			
-			echo "<tr>
+			if ($row['status'] === 'Delete')
+			{
+				echo "<tr>
+					<td width='1%'><label><input class='checkSelect' type='checkbox' value='" . $row['event_id'] . "'></label></td>
+					<td width='10%'><p class='statusDelete'>Event " . $row['event_id'] .  "</p></td>
+					<td width='10%'><p class='statusDelete'>" . $row['title'] . "</p></td>
+					<td width='10%'><p class='statusDelete'>" . $row['ecdescription'] . "</p></td>
+					<td width='30%'><p class='statusDelete'>" . $row['description'] . "</p></td>
+					<td width='10%'><p class='statusDelete'>" . $row['location'] . "</p></td>
+					<td width='10%'><p class='statusDelete'>" . date_format($start_date, 'l jS F Y h:i a') . "</p></td>
+					<td width='10%'><p class='statusDelete'>" . date_format($end_date, 'l jS F Y h:i a') . "</p></td>";
+			}
+			else
+			{
+				echo "<tr>
 					<td width='1%'><label><input class='checkSelect' type='checkbox' value='" . $row['event_id'] . "'></label></td>
 					<td width='10%'><p>Event " . $row['event_id'] .  "</p></td>
 					<td width='10%'><p>" . $row['title'] . "</p></td>
@@ -49,9 +63,32 @@
 					<td width='30%'><p>" . $row['description'] . "</p></td>
 					<td width='10%'><p>" . $row['location'] . "</p></td>
 					<td width='10%'><p>" . date_format($start_date, 'l jS F Y h:i a') . "</p></td>
-					<td width='10%'><p>" . date_format($end_date, 'l jS F Y h:i a') . "</p></td>
-					<td width='4%'><p>" . $row['status'] . "</p></td>
-					<td width='5%'><p><a href='#'" . $row['event_id'] . " title='"  . $row['event_id'] . "' onclick='showEventDetails(this.title)'><span class='glyphicon glyphicon-search'></span></a>
+					<td width='10%'><p>" . date_format($end_date, 'l jS F Y h:i a') . "</p></td>";
+			}
+			
+					
+					if ($row['status'] === 'Pending')
+					{
+						echo "<td width='4%'><p class='statusPending'>" . $row['status'] . "</p></td>";
+					}
+					else if($row['status'] === 'Start')
+					{
+						echo "<td width='4%'><p class='statusStart'>" . $row['status'] . "</p></td>";
+					}
+					else if($row['status'] === 'Complete')
+					{
+						echo "<td width='4%'><p class='statusComplete'>" . $row['status'] . "</p></td>";
+					}
+					else if($row['status'] === 'Delete')
+					{
+						echo "<td width='4%'><p class='statusDelete'>" . $row['status'] . "</p></td>";
+					}
+					else
+					{
+						echo "<td width='4%'><p>" . $row['status'] . "</p></td>";
+					}
+					
+				echo "<td width='5%'><p><a href='#'" . $row['event_id'] . " title='"  . $row['event_id'] . "' onclick='showEventDetails(this.title)'><span class='glyphicon glyphicon-search'></span></a>
 							<a href='#'" . $row['event_id'] . " title='"  . $row['event_id'] . "' onclick='showEditEventModal(this.title)'><span class='glyphicon glyphicon-pencil'></span></a>
 							<a href='#'" . $row['event_id'] . " title='"  . $row['event_id'] . "' onclick='showDeleteEventModal(this.title)'><span class='glyphicon glyphicon-trash'></span></a></p></td>
 					</tr>";
