@@ -39,6 +39,28 @@ $(document).ready(function(){
 	});
 });
 
+function dateSet(rewind) {
+	if(rewind) {
+		_date.subtract(1, 'month');
+		
+		var currMonth = new Date(_date).getMonth() + 1;
+		month = currMonth;
+		console.log(month);
+		CalendarTable();
+		
+	} else {
+		_date.add(1, 'month');
+		
+		var currMonth = new Date(_date).getMonth() + 1;
+		month = currMonth;
+			console.log(month);
+		CalendarTable();
+
+	}
+	$('#dateval').text(_date.format(_format));
+	
+
+}
 
 
 function loadMonthView() {

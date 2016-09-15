@@ -44,11 +44,42 @@ function dateInit() {
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover({
 		html: true,
-		content: "<div id=\"date\"></div><script>dt();<\/script>" // Embedded end script element breaks js, remember to split it.
+		content: "<div id=\"date\"></div><script>dt();<\/script>" 
 	});
 });
 
+function dateSet(rewind) {
+	if(rewind) {
+		_date.subtract(7, 'day');
+		
+		var currMonth = new Date(_date).getMonth() + 1;
+		month = currMonth;
+		
+		
+		var currDay = new Date(_date).getDate();
+		day = currDay;
+			console.log(month);
+			console.log(day);
+		CalendarTable();
+		
+	} else {
+		_date.add(7, 'day');
+		
+		var currMonth = new Date(_date).getMonth() + 1;
+		month = currMonth;
+		
+		
+		var currDay = new Date(_date).getDate();
+		day = currDay;
+			console.log(month);
+			console.log(day);
+		CalendarTable();
 
+	}
+	$('#dateval').text(_date.format(_format));
+	
+
+}
 
 function loadWeekView() {
 	dateInit();
@@ -211,7 +242,7 @@ function loadWeekView() {
 				if (day >=1 && day <=6){ 
 				FWD = 1;
 				monDate = 29;				
-				tueDate = FDW;
+				tueDate = FWD;
 				wedDate = FWD +1;
 				thuDate = FWD +2;
 				friDate = FWD +3;			
