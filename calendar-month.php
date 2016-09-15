@@ -34,13 +34,13 @@
 
 	<div class="container-fluid" id="day_container">
 		<div class="row" id="day_header">
-			<div class="col-md-1"><span class="glyphicon glyphicon-menu-left"></span></div>
+			<a href="#" onclick="dateSet(true)"><div class="col-md-1"><span class="glyphicon glyphicon-menu-left dayleft"></span></div></a>
 				<div class="col-md-10">
 					<a href="#" data-toggle="popover" title="Date Selector" data-placement="bottom" data-trigger="focus" data-content="">
 			 		<h4 id="dateval"></h4>
 					</a>
 				</div>
-				<div class="col-md-1"><span class="glyphicon glyphicon-menu-right"></span></div>
+				<a href="#" onclick="dateSet(false)"><div class="col-md-1"><span class="glyphicon glyphicon-menu-right dayright"></span></div></a>
 			</div>
 
 		<div class="row table-bordered" id="day_table">
