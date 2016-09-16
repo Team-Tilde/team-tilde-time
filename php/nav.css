@@ -1,0 +1,95 @@
+/* navbar */
+.navbar-default {
+    background-color: #005696;
+    border-color: #005696;
+}
+/* title */
+.title-icon{
+	width: 40px;
+	height: 40px;
+}
+.navbar-brand{
+	padding: 5px;
+}
+.navbar-default .navbar-brand {
+    color: #FFFFFF;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #FFFFFF;
+}
+/* link */
+.navbar-default .navbar-nav > li > a {
+    color: #FFFFFF;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #FFFFFF;
+	background-color: #007cc3;
+}
+.navbar-default .navbar-nav > .active > a, 
+.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #FFFFFF;
+	background-color: #007cc3;
+}
+.navbar-default .navbar-nav > .open > a, 
+.navbar-default .navbar-nav > .open > a:hover, 
+.navbar-default .navbar-nav > .open > a:focus {
+    color: #FFFFFF;
+	background-color: #007cc3;
+}
+/* caret */
+.navbar-default .navbar-nav > .dropdown > a .caret {
+    border-top-color: #FFFFFF;
+    border-bottom-color: #FFFFFF;
+}
+.navbar-default .navbar-nav > .dropdown > a:hover .caret,
+.navbar-default .navbar-nav > .dropdown > a:focus .caret {
+    border-top-color: #FFFFFF;
+    border-bottom-color: #FFFFFF;
+}
+.navbar-default .navbar-nav > .open > a .caret, 
+.navbar-default .navbar-nav > .open > a:hover .caret, 
+.navbar-default .navbar-nav > .open > a:focus .caret {
+    border-top-color: #FFFFFF;
+    border-bottom-color: #FFFFFF;
+}
+
+.dropdown-menu
+{
+	background-color: #007cc3;
+    border-color: #007cc3;
+}
+
+.dropdown-menu > .dropdown-header
+{
+	background-color: #007cc3;
+    border-color: #007cc3;
+	color: #FFFFFF;
+}
+
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus
+{
+	background-color: #005696;
+    border-color: #005696;
+	color: #FFFFFF;
+}
+
+.dropdown-menu > li > a
+{
+	background-color: #007cc3;
+    border-color: #007cc3;
+	color: #FFFFFF;
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus
+{
+	background-color: #005696;
+    border-color: #005696;
+	color: #FFFFFF;
+	text-decoration: underline;
+}
