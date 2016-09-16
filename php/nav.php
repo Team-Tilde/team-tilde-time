@@ -32,6 +32,7 @@ function echoActiveMenu($wordInUrl)
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
+				<li <?php echoActiveMenu("dashboard");?> dropdown"><a href="dashboard.php">Dashboard</a></li>
 				<li><a href="#">Messages</a></li>
 				<li <?php echoActiveMenu("calendar");?> dropdown">
 					<a href="calendar.php" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Calendar <span class="caret"></span></a>
