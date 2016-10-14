@@ -18,13 +18,13 @@
 		$sql = "SELECT t.task_id, tc.description as tcdescription, t.description, t.task_category_id, t.date_time_start, t.date_time_end, tes.status FROM Task as t
 			JOIN taskcategory as tc ON t.task_category_id = tc.task_category_id
 			JOIN TaskEventStatus as tes ON t.task_event_status_id = tes.task_event_status_id
-			WHERE t.date_time_end > t.date_time_start";
+			WHERE t.task_event_status_id != 4";
 	} else {
 		echo "<h2>$arow[0]</h2>";
 		$sql = "SELECT t.task_id, tc.description as tcdescription, t.description, t.task_category_id, t.date_time_start, t.date_time_end, tes.status FROM Task as t
 			JOIN taskcategory as tc ON t.task_category_id = tc.task_category_id
 			JOIN TaskEventStatus as tes ON t.task_event_status_id = tes.task_event_status_id
-			WHERE t.task_category_id = '" . $selected . "'";
+			WHERE t.task_category_id = '" . $selected . "' AND t.task_event_status_id != 4";
 	}
 	
 	$result = $conn->query($sql);
