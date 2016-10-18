@@ -31,6 +31,15 @@ $(document).ready(function(){
 	});
 });
 
+function dateSet(rewind) {
+	if(rewind) {
+		_date.subtract(1, 'day');
+	} else {
+		_date.add(1, 'day');
+	}
+	$('#dateval').text(_date.format(_format));
+	performQuery();
+}
 //-----------------------------------------------------
 
 var canvas;
@@ -43,12 +52,11 @@ var bgColor = "#0068a4";	// Dk.Blue color for box bg
 
 var divWidth;				// calculated by number of 'same day' tasks
 var divisions;				// if multiple events divide sections by...
-var colMultiplier = 0;		// The current working task, used to position rect and text as a multiplier
-var rowTimeMultiplier = 4;
 
 var reqData; 				// event_id, title, description, date_time_start, date_time_end
 var containerStore = new Array();
 
+// Main function, responsible for putting events in their place on the canvas
 function draw() {
 	divWidth = canvas.width() / divisions; // Temporary, figure out columns by collision
 
@@ -90,6 +98,8 @@ function draw() {
 	}
 }
 
+// Tests to see if two containers collide (time conflict) by checking if a coordinate point is over another container
+// Returns an int / float indicating how much the container needs to be moved on the x-axis
 function collideCheck(container) {
 	var collideCheck = true;
 	var push = 0;
@@ -108,7 +118,7 @@ function collideCheck(container) {
 	return push;
 }
 
-// Used to display event data, WIP
+// Used to display event data
 function handleClick(event, data) {
 	console.log("eventid:" + data.event_id);
 	var xhttp;    
@@ -127,6 +137,7 @@ function handleClick(event, data) {
 	$('#eventDetailModal').modal('show');
 }
 
+// Gets the difference between the inputted time
 function timeCalc(tStart, tEnd) {
 	console.log(tStart + " " + tEnd);
 	var a = moment(tStart, moment.ISO_8601);
@@ -139,6 +150,7 @@ function timeCalc(tStart, tEnd) {
 	return diff;
 }
 
+// Sets up the calendar on page load
 function prepareCanvas() {
 	drawTimeColumn();
 	dateInit();
@@ -158,12 +170,11 @@ function prepareCanvas() {
 
 }
 
+// Gets data from the database using AJAX, storing it in the reqData var
 function performQuery() {
-	// Finally, make an ajax call to prep data
 	$.ajax({
 		method: "POST",
 		url: "php/calendarquery.php",
-		//data: {"date": _date.format("201-05-08")},
 		data: {"date": _date.format("YYYY-MM-DD")},
 		success: function(data) {
 			if(data != null) {
@@ -175,16 +186,21 @@ function performQuery() {
 				cleanup();
 			}
 		},
+		error: function() {
+			cleanup();
+		},
 		dataType: "json"
 	});
 }
 
+// Wipes the canvas, called during date changes
 function cleanup() {
 	stage.clear();
 	stage.removeAllChildren();
 	stage.removeAllEventListeners();
 }
 
+// Utility function that draws the calendar's time column on page load
 function drawTimeColumn() {
 	document.write("<div class=\"row\" id=\"time_whole\">\
 						<div class=\"col-md-1\" id=\"time_whole_item\">12</div>\

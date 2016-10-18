@@ -20,15 +20,41 @@
 		if ($result->num_rows > 0) {
 			
 			while($row = $result->fetch_assoc()) {
-				echo "<p><label>Task Number: </label>" . $row['task_id'] . "</p>";
-				echo "<p><label>Task Category: </label>" . $row['tcdescription'] . "</p>";
-				echo "<p><label>Task Name: </label>" . $row['description'] . "</p>";
-				echo "<p><label>Task Start Date/Time: </label>" . $row['date_time_start'] . "</p>";
-				echo "<p><label>Task End Date/Time: </label>" . $row['date_time_end'] . "</p>";
-				echo "<p><label>Status: </label>" . $row['status'] . "</p>";
+				echo '<table><col width="200"><col width="400">';
+				echo "<tr><th>Number:</th><td>" . $row['task_id'] . "</td></tr>";
+				echo "<tr><th>Category:</th><td>" . $row['tcdescription'] . "</td></tr>";
+				echo "<tr><th>Name:</th><td>" . $row['description'] . "</td></tr>";
+				echo "<tr><th>Start Date/Time:</th><td>" . $row['date_time_start'] . "</td></tr>";
+				echo "<tr><th>End Date/Time:</th><td>" . $row['date_time_end'] . "</td></tr>";
+				echo "<tr><th>Status:</th><td>" . $row['status'] . "</td></tr>";
+				echo "</table>";
 			}
 		} else {
 			echo "No tasks found.";
+		}
+		
+		$sql = "SELECT description, date_time_start, date_time_end FROM Task_Note WHERE task_id = '" . $taskID . "'
+				ORDER BY date_time_start";
+		$result = $conn->query($sql);
+		
+		if ($result->num_rows > 0) {
+			echo '<hr/><h4>Task Notes</h4><hr/>';
+			$counter = 1;
+			while($row = $result->fetch_assoc()) {
+				
+				$start_date = date_create($row['date_time_start'], timezone_open("Australia/Sydney"));
+				$end_date = date_create($row['date_time_end'], timezone_open("Australia/Sydney"));
+				
+				echo '<table><col width="100">';
+				echo "<tr><th colspan='2'> Note " . $counter . "</th></tr>";
+				echo "<tr><th>Description:</th><td>" . $row['description'] . "</td></tr>";
+				echo "<tr><th>Start date:</th><td>" . date_format($start_date, 'l jS F Y h:i a') . "</td></tr>";
+				echo "<tr><th>End Date:</th><td>" . date_format($end_date, 'l jS F Y h:i a') . "</td></tr>";
+				echo "</table><br/>";
+				//echo "<p><label>Public/Private: </label>" . $row['public/private'] . "</p>";
+				$counter++;
+			}
+			
 		}
 		
 		$conn->close();

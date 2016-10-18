@@ -1,0 +1,30 @@
+#upcomingEvent
+{
+	width: 300px;
+	display: block;
+	margin: auto;
+}
+
+#unreadMessage
+{
+	width: 300px;
+	display: block;
+	margin: auto;
+}
+
+.warningDue
+{
+	color: red;
+	font-weight: bold;
+}
+
+.warningUnread
+{
+	color: orange;
+	font-weight: bold;
+}
+
+.noneDue
+{
+	color: green;
+}

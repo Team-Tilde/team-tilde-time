@@ -7,6 +7,7 @@
 	<title>View Events</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
 	<link href="css/nav.css" rel="stylesheet" type="text/css">
+	<link href="css/font.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>

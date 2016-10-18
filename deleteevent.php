@@ -12,7 +12,10 @@
 	{
 		$eventID = mysqli_real_escape_string($conn, $_GET['event']);
 
-		$sql = "DELETE FROM Event WHERE event_id=" . $eventID;
+		#$sql = "DELETE FROM Event WHERE event_id=" . $eventID; //Perma delete (removed)
+		
+		//Query to set status to deleted. 4 = Deleted.
+		$sql = "UPDATE Event SET task_event_status_id=4 WHERE event_id=" . $eventID;
 
 		if (mysqli_query($conn, $sql)) {
 			echo "0";

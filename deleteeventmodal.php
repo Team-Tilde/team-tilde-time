@@ -12,7 +12,7 @@
 	
 	$eventID = mysqli_real_escape_string($conn, $_GET['event']);
 	
-	$sql = "SELECT e.event_id, e.task_id, e.title, e.description, e.location, e.public, e.private, e.date_time_start, e.date_time_end, t.description as tdescription FROM Event as e, Task as t WHERE e.event_id = '" . $eventID . "' AND e.task_id=t.task_id";
+	$sql = "SELECT e.event_id, e.task_id, e.title, t.description as tdescription FROM Event as e, Task as t WHERE e.event_id = '" . $eventID . "' AND e.task_id=t.task_id";
 	$result = $conn->query($sql);
 	
 	if ($result->num_rows > 0) {
