@@ -5,25 +5,11 @@
 	if ($conn->connect_error) {
 		die("Connection failed: " . $conn->connect_error);
 	}
-
 	$selected = (int)mysqli_real_escape_string($conn ,$_GET['taskCatID']);
 	
 	$sql = "SELECT description FROM TaskCategory WHERE task_category_id = '" . $selected . "'";
 	$result = mysqli_query($conn, $sql);
 	$arow = mysqli_fetch_row($result);
-
-	if ($selected === 0) {
-		echo "<h2>All Tasks</h2>";
-		$sql = "SELECT t.task_id, tc.description as tcdescription, t.description, t.task_category_id, t.date_time_start, t.date_time_end, tes.status FROM Task as t
-			JOIN taskcategory as tc ON t.task_category_id = tc.task_category_id
-			JOIN TaskEventStatus as tes ON t.task_event_status_id = tes.task_event_status_id
-			WHERE t.task_event_status_id != 4";
-	} else {
-		echo "<h2>$arow[0]</h2>";
-		$sql = "SELECT t.task_id, tc.description as tcdescription, t.description, t.task_category_id, t.date_time_start, t.date_time_end, tes.status FROM Task as t
-			JOIN taskcategory as tc ON t.task_category_id = tc.task_category_id
-			JOIN TaskEventStatus as tes ON t.task_event_status_id = tes.task_event_status_id
-
 	if ($selected === 0) {
 		echo "<h2>All Tasks</h2>";
 		$sql = "SELECT t.task_id, tc.description as tcdescription, t.description, t.task_category_id, t.date_time_start, t.date_time_end, tes.status FROM Task as t
