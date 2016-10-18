@@ -1,18 +1,15 @@
 <?php
 	require_once "php/conf.php";
-
 	$conn = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
 	
 	if ($conn->connect_error) {
 		die("Connection failed: " . $conn->connect_error);
 	}
-
 	$selected = (int)mysqli_real_escape_string($conn ,$_GET['taskCatID']);
 	
 	$sql = "SELECT description FROM TaskCategory WHERE task_category_id = '" . $selected . "'";
 	$result = mysqli_query($conn, $sql);
 	$arow = mysqli_fetch_row($result);
-
 	if ($selected === 0) {
 		echo "<h2>All Tasks</h2>";
 		$sql = "SELECT t.task_id, tc.description as tcdescription, t.description, t.task_category_id, t.date_time_start, t.date_time_end, tes.status FROM Task as t
@@ -28,7 +25,6 @@
 	}
 	
 	$result = $conn->query($sql);
-
 	if ($result->num_rows > 0) {
 		
 		echo "<table id='tableTasks' class='table table-hover'>
