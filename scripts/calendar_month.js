@@ -1,6 +1,8 @@
 var _date;
 var _format = 'dddd, Do MMMM YYYY';
-var month =8;
+var month = new Date().getMonth() + 1;
+var month = new Date().getYear();
+
 
 function dt() {
 	$(function () {
@@ -15,15 +17,11 @@ function dt() {
 			$('#dateval').text(_date.format(_format));
 			$('[data-toggle="popover"]').blur();
 			$('[data-toggle="popover"]').popover("hide");
+			CalendarTable();
 		});
-		
-		$('#date').on('dp.change', function(e){ 
-		var currMonth = new Date(e.date).getMonth() + 1;
-		month = currMonth;
-		CalendarTable();
-		});
-		
+	
 	});
+
 }
 
 
@@ -42,18 +40,10 @@ $(document).ready(function(){
 function dateSet(rewind) {
 	if(rewind) {
 		_date.subtract(1, 'month');
-		
-		var currMonth = new Date(_date).getMonth() + 1;
-		month = currMonth;
-		console.log(month);
 		CalendarTable();
 		
 	} else {
 		_date.add(1, 'month');
-		
-		var currMonth = new Date(_date).getMonth() + 1;
-		month = currMonth;
-			console.log(month);
 		CalendarTable();
 
 	}
@@ -70,60 +60,40 @@ function loadMonthView() {
 
  	
 			function CalendarTable(){
+				
+		var getDaysInMonth = function(month,year) {  
+ 
+			//Day 0 is the last day in the previous month  
+			return new Date(year, month, 0).getDate(); 
+		}		
+		month = new Date(_date).getMonth() + 1;
+		var currYear = new Date(_date).getYear();
+		var yearHolder = "20" + currYear.toString().substr(1);
+		year = parseInt(yearHolder);
+		var daysInCurrentMonth = getDaysInMonth(month, year);
+		var daysInPreviousMonth = getDaysInMonth(month - 1, year);
+		var currentMonthStartDay = new Date(year + "-" + month + "-01").getDay() - 1;
+		console.log(currentMonthStartDay);
+		var days = 0;		
+		var daysPrior= daysInPreviousMonth - currentMonthStartDay;
+		
+		console.log(_date._d);
 
 			var div = document.getElementById('monthView');
 			
 			div.innerHTML = "<table  class='table' id='clndr'><tr><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th><th>Saturday</th><th>Sunday</th></tr></table>";
 			 var table = div.getElementsByTagName('tbody')[0];
 				//creates rows and cell to be added to table
-				var days = 0;
-				if (month == null){ //august default
-				var daysPrior=31;
-				}
-			else if (month == 1){ // Jan
-				var daysPrior=27;
-			}
-			else if (month == 2){ // Feb
-				var daysPrior=31;
-			}
-			else if (month == 3){ // Mar
-				var daysPrior=30;
-			}
-			else if (month == 4){ // Apr
-				var daysPrior=27;
-			}
-			else if (month == 5){ // May
-				var daysPrior=25;
-			}
-			else if (month == 6){ // Jun
-				var daysPrior=29;
-			}
-			else if (month == 7){ // Jul
-				var daysPrior=27;
-			}
-			else if (month == 8){ // Aug
-				var daysPrior=31;
-			}
-			else if (month == 9){ // Sep
-				var daysPrior=28;
-			}
-			else if (month == 10){ // Oct
-				var daysPrior=25;
-			}
-			else if (month == 11){ //Nov
-				var daysPrior=28;
-			}
-			else if (month == 12){ // Dec
-				var daysPrior=28;
-			}
+				
+				
 
 				
 				function calDays(){
-					if(daysPrior < 31){
+					if(daysPrior < daysInPreviousMonth){
 						daysPrior++;
 						return daysPrior;
 					}
-				if(days > -1 && days <30){
+				if(days > -1 && days <daysInCurrentMonth){
 					days++;
 					}
 				else{
@@ -190,15 +160,15 @@ function loadMonthView() {
 							if( month.toString().length == 1){
 								var useMonth = "0"+month;
 								console.log("true");
+								//console.log(currYear);
 							}
 							else{
 								var useMonth = month;
+								//console.log(currYear);
 								console.log("False");
-								console.log(useMonth);
-								console.log(useMonth.toString().length);
 							}
 							
-							if (str.indexOf("2016-"+useMonth+"") >= 0){
+							if (str.indexOf(year +"-"+useMonth+"") >= 0){
 								var res = str.substr(8, 2);
 								
 								var s = res;
@@ -246,7 +216,7 @@ function loadMonthView() {
 			console.log("False");
 		}
 		
-		var newDate= "2016-"+useMonth+"-"+date;
+		var newDate= year + "-"+useMonth+"-"+date;
 		console.log(newDate);
 		xhttp.open("GET", "showEventsMonth.php?task="+newDate, true);
 		xhttp.send();
